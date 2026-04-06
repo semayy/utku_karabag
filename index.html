@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mali Müşavirlik Dijital Dönüşüm Teklifi - 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#020617', // Very dark slate/blue for finance trust
+                            surface: 'rgba(15, 23, 42, 0.4)',
+                            primary: '#fbbf24', // Amber/Gold for prestige
+                            secondary: '#2dd4bf', // Teal for technology/growth
+                            accent: '#3b82f6', // Blue for corporate trust
+                            glow: 'rgba(251, 191, 36, 0.3)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Outfit"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    },
+                    backgroundImage: {
+                        'finance-gradient': 'linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #2dd4bf 100%)',
+                        'glass-gradient': 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+                    },
+                    animation: {
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
+                            '50%': { transform: 'translateY(-15px) scale(1.02)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: 0.3, transform: 'scale(1)' },
+                            '50%': { opacity: 0.6, transform: 'scale(1.05)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            background-color: #020617; 
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Premium Glassmorphism */
+        .glass-premium {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(251, 191, 36, 0.15); /* Gold top border */
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            z-index: 10;
+        }
+
+        .glass-premium:hover {
+            transform: translateY(-5px);
+            border-color: rgba(251, 191, 36, 0.3);
+            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(251, 191, 36, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        /* Glowing text effect */
+        .text-glow-gold { text-shadow: 0 0 30px rgba(251, 191, 36, 0.4); }
+        
+        .text-gradient-gold {
+            background: linear-gradient(to right, #fde68a, #fbbf24, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Abstract Grid */
+        .bg-grid-finance {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #fbbf24; }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-primary selection:text-brand-bg">
+
+    <!-- Background Ambience -->
+    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+        <div class="bg-grid-finance"></div>
+        <!-- Gold/Teal Glows -->
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-brand-primary/10 blur-[120px] animate-pulse-glow"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full bg-brand-secondary/5 blur-[150px] animate-pulse-glow" style="animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="fixed top-6 left-0 right-0 z-50 px-4 transition-all duration-300 flex justify-center">
+        <div class="glass-premium !rounded-full px-6 py-3 flex justify-between items-center w-full max-w-6xl">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center text-brand-bg font-bold text-sm">MM</div>
+                <span class="text-lg md:text-xl font-serif font-bold text-white tracking-wide">Dijital <span class="text-brand-primary">Dönüşüm</span></span>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                <a href="#kapsam" class="hover:text-brand-primary transition-colors">Proje Kapsamı</a>
+                <a href="#neden-biz" class="hover:text-brand-primary transition-colors">Neden Biz?</a>
+                <a href="#takvim" class="hover:text-brand-primary transition-colors">Takvim</a>
+                <a href="#yatirim" class="hover:text-brand-primary transition-colors">Yatırım</a>
+            </nav>
+
+            <a href="#yatirim" class="bg-brand-primary/10 border border-brand-primary/30 hover:bg-brand-primary hover:text-brand-bg text-brand-primary px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">
+                Teklifi Onayla
+            </a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-32 md:py-40 space-y-32">
+        
+        <!-- Hero Section -->
+        <section class="relative z-10 flex flex-col lg:flex-row items-center justify-between min-h-[60vh] gap-12">
+            <div class="w-full lg:w-3/5 space-y-8 text-center lg:text-left reveal active">
+                <div class="inline-flex items-center gap-2 glass-premium !rounded-full px-5 py-2.5 text-xs md:text-sm font-medium mb-2 border border-brand-primary/20 text-brand-primary">
+                    <i class="fas fa-shield-check"></i>
+                    Kurumsal İtibar & Yapay Zeka Optimizasyonu
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] tracking-tight text-white">
+                    Mali Müşavirliğin <br/>
+                    <span class="text-gradient-gold">Yeni Nesil</span> Yüzü.
+                </h1>
+                
+                <p class="text-lg text-slate-400 max-w-2xl font-light leading-relaxed mx-auto lg:mx-0">
+                    Sektörel uzmanlığınızı dijitale taşıyoruz. WordPress tabanlı premium web mimarisi, sıfır iş yükü ile içerik üretimi ve yapay zeka destekli görünürlük ile markanızı büyütüyoruz.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
+                    <a href="#kapsam" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-primary text-brand-bg font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(251,191,36,0.3)]">
+                        Kapsamı İncele <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Abstract 3D/Finance Visual Placeholder -->
+            <div class="w-full lg:w-2/5 relative flex justify-center items-center h-[300px] md:h-[400px] z-10 pointer-events-none reveal active">
+                <div class="absolute inset-0 bg-brand-secondary/20 blur-[100px] rounded-full mix-blend-screen animate-pulse-glow"></div>
+                <!-- Image representing finance/accounting -->
+                <img src="https://www.atikeryazilim.com.tr/upload/ck_e35cc5fb-f803-45c0-ae2e-cf26b8c1c20e_ck_78bde56c-f839-40ee-bda4-e78333c3fad1_MUHASEBE-compressor.png" 
+                     alt="Bütçe ve Muhasebe İllüstrasyonu" 
+                     class="w-[130%] max-w-[600px] object-contain drop-shadow-[0_20px_50px_rgba(45,212,191,0.2)] animate-float-slow">
+            </div>
+        </section>
+
+        <!-- Kapsam Section -->
+        <section id="kapsam" class="pt-10 reveal">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-white text-glow-gold">Bütünleşik Dijital Ekosistem</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto text-lg font-light">Mali müşavirlik vizyonunuza yakışır, A'dan Z'ye anahtar teslim hizmet modüllerimiz.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                
+                <!-- Web & WordPress -->
+                <div class="glass-premium p-8 group">
+                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fab fa-wordpress"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 font-display">Premium Web Mimarisi</h3>
+                    <p class="text-slate-400 font-light text-sm mb-4">WordPress veri tabanı ile ölçeklenebilir, mobil uyumlu ve kurum kimliğinizi yansıtan modern arayüz tasarımı.</p>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary text-xs"></i> Hızlı ve Güvenli Altyapı</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary text-xs"></i> Yönetilebilir Panel</li>
+                    </ul>
+                </div>
+
+                <!-- SEO & GEO -->
+                <div class="glass-premium p-8 group">
+                    <div class="w-12 h-12 rounded-xl bg-brand-secondary/10 border border-brand-secondary/20 flex items-center justify-center text-xl text-brand-secondary mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 font-display">SEO, GEO & AI</h3>
+                    <p class="text-slate-400 font-light text-sm mb-4">Yeni nesil arama motoru optimizasyonu. Yapay zeka aramaları ve bölgesel (GEO) aramalarda üst sıralarda yer alma.</p>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-secondary text-xs"></i> Bölgesel Anahtar Kelimeler</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-secondary text-xs"></i> AI Destekli Kod Yapısı</li>
+                    </ul>
+                </div>
+
+                <!-- İçerik Üretimi (Anahtar Teslim) -->
+                <div class="glass-premium p-8 group md:col-span-2 lg:col-span-1 border-brand-primary/30">
+                    <div class="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-xl text-brand-primary mb-6 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(251,191,36,0.3)]">
+                        <i class="fas fa-pen-nib"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 font-display">Sıfır İş Yükü (İçerik)</h3>
+                    <p class="text-slate-400 font-light text-sm mb-4">Siz işinize odaklanın; hakkımızda, hizmetler ve tüm metin/datalar uzman editörlerimizce üretilip onaya sunulur.</p>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary text-xs"></i> Sektörel Dil Hakimiyeti</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary text-xs"></i> Veri Girişi & Onay Süreci</li>
+                    </ul>
+                </div>
+
+                <!-- Kurumsal İletişim -->
+                <div class="glass-premium p-8 group">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-xl text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 font-display">Kurumsal İletişim Seti</h3>
+                    <p class="text-slate-400 font-light text-sm mb-4">İtibarınızı destekleyecek profesyonel HTML kurumsal e-posta imzaları ve iletişim altyapısı kurgusu.</p>
+                </div>
+
+                <!-- LinkedIn & Haritalar -->
+                <div class="glass-premium p-8 group md:col-span-2">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-xl text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 font-display">Dış Kaynak Optimizasyonları</h3>
+                    <div class="grid sm:grid-cols-2 gap-4 mt-4">
+                        <div class="bg-white/5 rounded-lg p-4">
+                            <div class="text-brand-primary font-semibold mb-1"><i class="fab fa-linkedin text-blue-400 mr-2"></i> LinkedIn</div>
+                            <div class="text-xs text-slate-400">Kurumsal profilin oluşturulması, kapak tasarımı ve profesyonel ağ optimizasyonu.</div>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-4">
+                            <div class="text-brand-primary font-semibold mb-1"><i class="fab fa-google text-red-400 mr-2"></i> Google Haritalar</div>
+                            <div class="text-xs text-slate-400">My Business kaydı, lokasyon optimizasyonu (GEO) ve dijital vitrin kurulumu.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Neden Biz? -->
+        <section id="neden-biz" class="pt-10 reveal">
+            <div class="glass-premium p-10 md:p-16 relative overflow-hidden">
+                <!-- Decorative Elements -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
+                
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Neden Bizimle <br>Çalışmalısınız?</h2>
+                        <p class="text-slate-400 font-light mb-8 text-lg">Mali müşavirlik sektörü, sıradan tasarımları değil; güveni, yasal etiği ve kurumsallığı yansıtan özel bir dili hak eder.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 shrink-0 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary mt-1"><i class="fas fa-hourglass-half"></i></div>
+                                <div>
+                                    <h4 class="text-white font-bold text-lg">Zamanınız Size Kalır</h4>
+                                    <p class="text-slate-400 text-sm mt-1">Sizden sayfa sayfa metin istemiyoruz. Firmanızın ana hatlarını dinliyor, tüm içeriği biz yazıp, verileri biz girip sadece onayınıza sunuyoruz.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 shrink-0 rounded-full bg-brand-secondary/10 flex items-center justify-center text-brand-secondary mt-1"><i class="fas fa-bullseye"></i></div>
+                                <div>
+                                    <h4 class="text-white font-bold text-lg">Teknolojik Üstünlük</h4>
+                                    <p class="text-slate-400 text-sm mt-1">Standart bir web sitesi değil; yapay zekanın anlayabileceği semantik kod yapısı ve bölgesel müşteri çekmeye odaklı (GEO) altyapı sunuyoruz.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-10 h-10 shrink-0 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 mt-1"><i class="fas fa-layer-group"></i></div>
+                                <div>
+                                    <h4 class="text-white font-bold text-lg">Bütünsel Yaklaşım</h4>
+                                    <p class="text-slate-400 text-sm mt-1">Sadece siteyi kurup bırakmıyoruz. Google Haritalar, LinkedIn vitrini ve kurumsal mail imzanıza kadar dijital varlığınızı tam bir paket olarak teslim ediyoruz.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Visual representation -->
+                    <div class="relative h-full min-h-[300px] rounded-2xl bg-slate-900/50 border border-slate-700/50 flex items-center justify-center p-8 overflow-hidden">
+                        <div class="absolute inset-0 bg-grid-finance opacity-50"></div>
+                        <div class="relative z-10 w-full max-w-sm space-y-4">
+                            <!-- Mock UI Elements -->
+                            <div class="h-12 bg-slate-800/80 rounded-lg border border-slate-600/50 flex items-center px-4 gap-3 animate-pulse">
+                                <div class="w-6 h-6 rounded-full bg-brand-primary/50"></div>
+                                <div class="h-2 w-24 bg-slate-600 rounded"></div>
+                            </div>
+                            <div class="h-24 bg-slate-800/80 rounded-lg border border-slate-600/50 p-4">
+                                <div class="h-2 w-1/3 bg-brand-secondary/50 rounded mb-3"></div>
+                                <div class="h-2 w-full bg-slate-700 rounded mb-2"></div>
+                                <div class="h-2 w-4/5 bg-slate-700 rounded"></div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="h-20 w-1/2 bg-slate-800/80 rounded-lg border border-slate-600/50 flex items-center justify-center text-blue-400/50 text-2xl"><i class="fab fa-linkedin"></i></div>
+                                <div class="h-20 w-1/2 bg-slate-800/80 rounded-lg border border-slate-600/50 flex items-center justify-center text-red-400/50 text-2xl"><i class="fas fa-map-marker-alt"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Çalışma Takvimi (30 Gün) -->
+        <section id="takvim" class="pt-10 reveal">
+            <div class="text-center space-y-4 mb-16">
+                <h2 class="text-4xl md:text-5xl font-display font-bold text-white text-glow-gold">Çalışma Takvimi</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto text-lg font-light">30 günlük net teslimat süreci ile projenin adım adım yol haritası.</p>
+            </div>
+
+            <div class="relative max-w-4xl mx-auto mt-12">
+                <!-- Center Line -->
+                <div class="absolute left-[28px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-primary via-brand-secondary to-transparent"></div>
+
+                <div class="space-y-10">
+                    <!-- Hafta 1 -->
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between group">
+                        <div class="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-bg border-2 border-brand-primary group-hover:bg-brand-primary group-hover:shadow-[0_0_15px_rgba(251,191,36,0.8)] transition-all z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-[45%] md:text-right md:pr-12">
+                            <h4 class="text-2xl font-bold text-white">1. Hafta: Strateji & İçerik</h4>
+                        </div>
+                        <div class="ml-16 md:ml-0 md:w-[45%] md:pl-12 mt-2 md:mt-0">
+                            <div class="glass-premium p-6 border-l-2 md:border-l-0 md:border-r-2 border-brand-primary/50">
+                                <ul class="text-sm text-slate-400 font-light space-y-2">
+                                    <li><i class="fas fa-check text-brand-primary mr-2"></i> Firma yapısının analizi ve SEO stratejisi</li>
+                                    <li><i class="fas fa-check text-brand-primary mr-2"></i> Tüm site metinlerinin tarafımızca yazılması</li>
+                                    <li><i class="fas fa-check text-brand-primary mr-2"></i> İçeriklerin onaya sunulması</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hafta 2 -->
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between group md:flex-row-reverse">
+                        <div class="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-bg border-2 border-brand-secondary group-hover:bg-brand-secondary group-hover:shadow-[0_0_15px_rgba(45,212,191,0.8)] transition-all z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-[45%] md:text-left md:pl-12">
+                            <h4 class="text-2xl font-bold text-white">2. Hafta: Kurulum & Tasarım</h4>
+                        </div>
+                        <div class="ml-16 md:ml-0 md:w-[45%] md:pr-12 mt-2 md:mt-0 md:text-right">
+                            <div class="glass-premium p-6 border-l-2 md:border-l-0 md:border-r-2 border-brand-secondary/50">
+                                <ul class="text-sm text-slate-400 font-light space-y-2">
+                                    <li>WordPress altyapı ve veri tabanı kurulumu <i class="fas fa-check text-brand-secondary ml-2 hidden md:inline"></i></li>
+                                    <li>Kurumsal arayüz (UI/UX) tasarımı inşası <i class="fas fa-check text-brand-secondary ml-2 hidden md:inline"></i></li>
+                                    <li>Onaylanan içeriklerin sisteme entegrasyonu <i class="fas fa-check text-brand-secondary ml-2 hidden md:inline"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hafta 3 -->
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between group">
+                        <div class="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-bg border-2 border-blue-400 group-hover:bg-blue-400 group-hover:shadow-[0_0_15px_rgba(96,165,250,0.8)] transition-all z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-[45%] md:text-right md:pr-12">
+                            <h4 class="text-2xl font-bold text-white">3. Hafta: Dış Entegrasyonlar</h4>
+                        </div>
+                        <div class="ml-16 md:ml-0 md:w-[45%] md:pl-12 mt-2 md:mt-0">
+                            <div class="glass-premium p-6 border-l-2 md:border-l-0 md:border-r-2 border-blue-400/50">
+                                <ul class="text-sm text-slate-400 font-light space-y-2">
+                                    <li><i class="fas fa-check text-blue-400 mr-2"></i> SEO & GEO (Yerel) teknik kodlamaları</li>
+                                    <li><i class="fas fa-check text-blue-400 mr-2"></i> Google Haritalar & My Business optimizasyonu</li>
+                                    <li><i class="fas fa-check text-blue-400 mr-2"></i> LinkedIn firma profili kurgusu</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hafta 4 -->
+                    <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between group md:flex-row-reverse">
+                        <div class="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-bg border-2 border-emerald-400 group-hover:bg-emerald-400 group-hover:shadow-[0_0_15px_rgba(52,211,153,0.8)] transition-all z-10"></div>
+                        <div class="ml-16 md:ml-0 md:w-[45%] md:text-left md:pl-12">
+                            <h4 class="text-2xl font-bold text-white">4. Hafta: Test & Teslimat</h4>
+                        </div>
+                        <div class="ml-16 md:ml-0 md:w-[45%] md:pr-12 mt-2 md:mt-0 md:text-right">
+                            <div class="glass-premium p-6 border-l-2 md:border-l-0 md:border-r-2 border-emerald-400/50 shadow-[0_0_20px_rgba(52,211,153,0.1)]">
+                                <ul class="text-sm text-slate-400 font-light space-y-2">
+                                    <li>Mobil/Masaüstü hız ve güvenlik testleri <i class="fas fa-check text-emerald-400 ml-2 hidden md:inline"></i></li>
+                                    <li>Kurumsal mail imzalarının teslimi <i class="fas fa-check text-emerald-400 ml-2 hidden md:inline"></i></li>
+                                    <li><strong class="text-white">Projenin Yayına Alınması (30. Gün)</strong> <i class="fas fa-rocket text-emerald-400 ml-2 hidden md:inline"></i></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fiyatlandırma / Yatırım -->
+        <section id="yatirim" class="pt-20 reveal">
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-premium !border-brand-primary/40 p-10 md:p-16 text-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-finance-gradient opacity-10"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-sm font-semibold mb-6 border border-brand-primary/20">
+                            <i class="fas fa-gem"></i> Anahtar Teslim Proje
+                        </div>
+                        
+                        <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">Toplam Yatırım Bedeli</h2>
+                        <p class="text-slate-300 font-light max-w-xl mx-auto mb-10 text-lg">
+                            İçerik üretimi, WordPress web sitesi, SEO/GEO/AI entegrasyonları, LinkedIn, Haritalar ve mail imzalarını kapsayan tek seferlik proje bedeli.
+                        </p>
+                        
+                        <div class="flex flex-col items-center justify-center mb-10">
+                            <div class="text-6xl md:text-7xl font-bold text-gradient-gold tracking-tight mb-2">
+                                35.000 <span class="text-2xl text-slate-400 font-medium">TL</span>
+                            </div>
+                            <div class="text-sm text-slate-500">+ KDV | Teslimat Süresi: 30 Gün</div>
+                        </div>
+
+                        <a href="mailto:info@ornekajans.com" class="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white text-slate-900 font-bold text-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300">
+                            <i class="fas fa-handshake text-brand-primary text-xl"></i> 
+                            Projeyi Başlat
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 border-t border-slate-800 bg-brand-bg relative py-12 text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center text-brand-bg font-bold text-xl mx-auto mb-6">MM</div>
+            <p class="text-slate-500 font-light text-sm mb-2">Mali Müşavirlik firmaları için özel olarak hazırlanmış uçtan uca dijital dönüşüm teklifidir.</p>
+            <p class="text-slate-600 text-xs">&copy; 2026. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 100;
+                
+                reveals.forEach(reveal => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); // Trigger once on load
+        });
+    </script>
+</body>
+</html>
