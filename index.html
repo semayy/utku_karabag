@@ -1,475 +1,955 @@
 <!DOCTYPE html>
-<html lang="tr" class="scroll-smooth">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mali Müşavirlik Dijital Dönüşüm Teklifi - 2026</title>
+    <title>OnScala - Kurumsal Kimlik Rehberi (Brand Bible)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
-                    colors: {
-                        brand: {
-                            bg: '#020617', // Very dark slate/blue for finance trust
-                            surface: 'rgba(15, 23, 42, 0.4)',
-                            primary: '#fbbf24', // Amber/Gold for prestige
-                            secondary: '#2dd4bf', // Teal for technology/growth
-                            accent: '#3b82f6', // Blue for corporate trust
-                            glow: 'rgba(251, 191, 36, 0.3)'
-                        }
-                    },
                     fontFamily: {
-                        sans: ['"Outfit"', 'sans-serif'],
-                        display: ['"Space Grotesk"', 'sans-serif'],
-                        serif: ['"Playfair Display"', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                        'display': ['Space Grotesk', 'sans-serif'],
                     },
-                    backgroundImage: {
-                        'finance-gradient': 'linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #2dd4bf 100%)',
-                        'glass-gradient': 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
-                    },
-                    animation: {
-                        'float-slow': 'float 8s ease-in-out infinite',
-                        'pulse-glow': 'pulseGlow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0) scale(1)' },
-                            '50%': { transform: 'translateY(-15px) scale(1.02)' },
-                        },
-                        pulseGlow: {
-                            '0%, 100%': { opacity: 0.3, transform: 'scale(1)' },
-                            '50%': { opacity: 0.6, transform: 'scale(1.05)' },
-                        }
+                    colors: {
+                        'brand-black': '#111111',
+                        'brand-green': '#00F060',
+                        'brand-gray': '#64748B',
+                        'brand-light': '#F8FAFC',
                     }
                 }
             }
         }
     </script>
     <style>
-        body { 
-            background-color: #020617; 
-            color: #f8fafc;
-            overflow-x: hidden;
-        }
-
-        /* Premium Glassmorphism */
-        .glass-premium {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-top: 1px solid rgba(251, 191, 36, 0.15); /* Gold top border */
-            border-left: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            z-index: 10;
-        }
-
-        .glass-premium:hover {
-            transform: translateY(-5px);
-            border-color: rgba(251, 191, 36, 0.3);
-            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(251, 191, 36, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
-
-        /* Glowing text effect */
-        .text-glow-gold { text-shadow: 0 0 30px rgba(251, 191, 36, 0.4); }
-        
-        .text-gradient-gold {
-            background: linear-gradient(to right, #fde68a, #fbbf24, #d97706);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Abstract Grid */
-        .bg-grid-finance {
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-            background-size: 60px 60px;
-            position: absolute;
-            inset: 0;
-            z-index: -2;
-            mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
-            -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
-        }
-
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #fbbf24; }
+        .bg-grid { background-image: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px); background-size: 20px 20px; }
+        .bg-grid-dark { background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 20px 20px; }
+        html { scroll-behavior: smooth; }
+        .zfold-scene { perspective: 3000px; transform-style: preserve-3d; }
+        .zfold-wrapper { transform: rotateX(10deg) rotateY(-20deg); transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .zfold-wrapper:hover { transform: rotateX(2deg) rotateY(-5deg) scale(1.05); }
+        .zfold-p1 { transform-origin: right; transform: rotateY(45deg); box-shadow: inset -10px 0 20px rgba(0,0,0,0.3); transition: transform 1s; }
+        .zfold-p2 { transform: translateZ(-1px); }
+        .zfold-p3 { transform-origin: left; transform: rotateY(-45deg); box-shadow: inset 10px 0 20px rgba(0,0,0,0.2); transition: transform 1s; }
+        .zfold-wrapper:hover .zfold-p1 { transform: rotateY(10deg); }
+        .zfold-wrapper:hover .zfold-p3 { transform: rotateY(-10deg); }
+        .dna-part { transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .dna-group:hover .dna-o { transform: translateY(-20px); }
+        .dna-group:hover .dna-n { transform: translateX(-15px); }
+        .dna-group:hover .dna-s { transform: translateX(15px); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="antialiased selection:bg-brand-primary selection:text-brand-bg">
+<body class="bg-white text-brand-black font-sans antialiased selection:bg-brand-green">
 
-    <!-- Background Ambience -->
-    <div class="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
-        <div class="bg-grid-finance"></div>
-        <!-- Gold/Teal Glows -->
-        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-brand-primary/10 blur-[120px] animate-pulse-glow"></div>
-        <div class="absolute bottom-[-10%] right-[-10%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full bg-brand-secondary/5 blur-[150px] animate-pulse-glow" style="animation-delay: 2s;"></div>
-    </div>
+    <!-- Nav -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-20">
+            <div class="flex items-center gap-2">
+                <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#111"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                </svg>
+                <span class="font-display font-bold text-xl">OnScala.</span>
+            </div>
+            <div class="hidden md:flex space-x-6 text-xs font-bold uppercase tracking-widest text-gray-500">
+                <a href="#brand-essence" class="hover:text-brand-green transition-colors">Marka Özü</a>
+                <a href="#logo-design" class="hover:text-brand-green transition-colors">Varlıklar</a>
+                <a href="#color-palette" class="hover:text-brand-green transition-colors">Renk & Font</a>
+                <a href="#applications" class="hover:text-brand-green transition-colors">Uygulamalar</a>
+                <a href="#materials" class="hover:text-brand-green transition-colors">Materyaller</a>
+                <a href="#digital" class="hover:text-brand-green transition-colors">Dijital</a>
+            </div>
+        </div>
+    </nav>
 
-    <!-- Navbar -->
-    <header class="fixed top-6 left-0 right-0 z-50 px-4 transition-all duration-300 flex justify-center">
-        <div class="glass-premium !rounded-full px-6 py-3 flex justify-between items-center w-full max-w-6xl">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center text-brand-bg font-bold text-sm">MM</div>
-                <span class="text-lg md:text-xl font-serif font-bold text-white tracking-wide">Dijital <span class="text-brand-primary">Dönüşüm</span></span>
+    <!-- Hero -->
+    <section class="relative pt-40 pb-20 bg-brand-light bg-grid">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="inline-block px-4 py-1 rounded-full bg-black/5 text-[10px] font-bold mb-6 tracking-widest uppercase">Brand Bible v6.0 (Ultimate Full Assets)</div>
+            <h1 class="text-6xl md:text-8xl font-display font-bold tracking-tighter mb-6">Mühendislik <span class="text-brand-green">Estetiği.</span></h1>
+            <p class="max-w-2xl mx-auto text-gray-500 text-lg font-light leading-relaxed">Fiziksel üretimin dijital hassasiyetle buluştuğu nokta. Tüm kimlik varlıklarını yüksek çözünürlüklü olarak indirin.</p>
+        </div>
+    </section>
+
+    <!-- Marka Özü -->
+    <section id="brand-essence" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-sm font-bold tracking-widest text-brand-green uppercase mb-3">01. Marka Özü</h2>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold mb-6">Yeni Nesil Gerçeklik.</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Fiziksel üretim artık sadece el işçiliği değil, yüksek teknolojili bir süreçtir. <strong>OnScala.</strong>, 3D modelleme, lazer kesim ve ileri üretim tekniklerini harmanlayarak "sıfır hata" felsefesini maket sanatına entegre eder.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-green/20 flex items-center justify-center mt-1">
+                                <span class="w-2 h-2 rounded-full bg-brand-green shadow-[0_0_5px_#00F060]"></span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-brand-black">Vizyonumuz</h4>
+                                <p class="text-sm text-gray-500 mt-1">Dijital evrenin verilerini, kusursuz fiziksel kütlelere dönüştürmek.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-brand-green/20 flex items-center justify-center mt-1">
+                                <span class="w-2 h-2 rounded-full bg-brand-green shadow-[0_0_5px_#00F060]"></span>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-brand-black">Değerlerimiz</h4>
+                                <p class="text-sm text-gray-500 mt-1">İleri Teknoloji, İzometrik Kesinlik, Estetik Algımatür.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-brand-black p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-grid-dark opacity-30"></div>
+                    <div class="relative z-10 border-l-2 border-brand-green pl-6 py-4">
+                        <p class="text-2xl font-display font-medium italic text-white">
+                            "Mükemmeliyet, gerçeğin bilgisayar ekranındaki kadar kusursuz olmasıdır."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo DNA & Asset Hub -->
+    <section id="logo-design" class="py-24 bg-brand-black text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-sm font-bold tracking-widest text-brand-green uppercase mb-3 text-center">02. Logo Anatomisi</h2>
+            <h3 class="text-3xl md:text-4xl font-display font-bold mb-16 text-center">İzometrik Monogram Geometrisi</h3>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="dna-group cursor-crosshair flex flex-col items-center">
+                    <h4 class="text-xs font-bold tracking-[0.3em] text-gray-400 mb-12 uppercase">Logo Topology / DNA</h4>
+                    <svg width="300" height="300" viewBox="0 0 100 100" fill="none">
+                        <g class="dna-part dna-o"><path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/></g>
+                        <g class="dna-part dna-n"><path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#FFF"/></g>
+                        <g class="dna-part dna-s"><path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/></g>
+                    </svg>
+                </div>
+                <div class="space-y-8">
+                    <h3 class="text-4xl font-display font-bold">Varlık Merkezi</h3>
+                    <p class="text-gray-400">Tüm logolar ve amblemler şeffaf PNG ve vektörel SVG formatlarında indirilmeye hazırdır.</p>
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="p-5 bg-white/5 border border-brand-green rounded-2xl flex justify-between items-center shadow-[0_0_15px_rgba(0,240,96,0.1)]">
+                            <span class="font-bold text-sm">Transparan Logolar (HD)</span>
+                            <div class="flex gap-2">
+                                <button onclick="triggerDownload('OnScala_Logo_Transparent_Koyu.png', 'png_transparent')" class="px-4 py-2 bg-brand-green text-black rounded-lg font-bold text-[10px] hover:bg-white transition">KOYU PNG</button>
+                                <button onclick="triggerDownload('OnScala_Logo_Transparent_Acik.png', 'png_transparent')" class="px-4 py-2 bg-brand-green text-black rounded-lg font-bold text-[10px] hover:bg-white transition">AÇIK PNG</button>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center">
+                            <span class="font-bold text-sm">Vektörel Format (Açık/Koyu Logo)</span>
+                            <div class="flex gap-2">
+                                <button onclick="triggerDownload('OnScala_Logo_Primary.svg', 'svg')" class="px-4 py-2 bg-[#222] text-white rounded-lg font-bold text-[10px] hover:bg-white hover:text-black">SVG</button>
+                                <button onclick="triggerDownload('OnScala_Logo_Primary.ai', 'ai')" class="px-4 py-2 bg-[#222] text-white rounded-lg font-bold text-[10px] hover:bg-white hover:text-black">AI</button>
+                            </div>
+                        </div>
+                        <div class="p-5 bg-white/5 border border-white/10 rounded-2xl flex justify-between items-center">
+                            <span class="font-bold text-sm">Monokrom Logo (Lazer/Kazıma)</span>
+                            <button onclick="triggerDownload('OnScala_Logo_Monochrome.svg', 'svg_monochrome')" class="px-4 py-2 bg-[#222] text-white rounded-lg font-bold text-[10px] hover:bg-white hover:text-black">SVG İNDİR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Renk & Tipografi -->
+    <section id="color-palette" class="py-20 bg-brand-light border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-sm font-bold tracking-widest text-brand-green uppercase mb-3 text-center">03. Renk & Tipografi</h2>
+            <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-black mb-16 text-center">Mühendislik Estetiği.</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+                <div class="group rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:-translate-y-2 transition-transform">
+                    <div class="h-32 bg-[#111111]"></div><div class="bg-white p-5"><h4 class="font-bold mb-1">Uzay Siyahı</h4><p class="text-[10px] font-mono text-gray-500">HEX: #111111<br>RGB: 17, 17, 17</p></div>
+                </div>
+                <div class="group rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:-translate-y-2 transition-transform">
+                    <div class="h-32 bg-[#00F060]"></div><div class="bg-white p-5"><h4 class="font-bold mb-1">Neon Yeşil</h4><p class="text-[10px] font-mono text-gray-500">HEX: #00F060<br>RGB: 0, 240, 96</p></div>
+                </div>
+                <div class="group rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:-translate-y-2 transition-transform">
+                    <div class="h-32 bg-[#64748B]"></div><div class="bg-white p-5"><h4 class="font-bold mb-1">Titanyum Gri</h4><p class="text-[10px] font-mono text-gray-500">HEX: #64748B<br>RGB: 100, 116, 139</p></div>
+                </div>
+                <div class="group rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:-translate-y-2 transition-transform">
+                    <div class="h-32 bg-[#F8FAFC]"></div><div class="bg-white p-5"><h4 class="font-bold mb-1">Dijital Beyaz</h4><p class="text-[10px] font-mono text-gray-500">HEX: #F8FAFC<br>RGB: 248, 250, 252</p></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="p-10 bg-white rounded-3xl border border-gray-200 relative overflow-hidden shadow-xl">
+                    <h4 class="text-3xl font-display font-bold text-gray-900 mb-2">Space Grotesk</h4>
+                    <p class="text-xs text-gray-500 mb-6 font-mono tracking-widest uppercase">Logo ve Başlık Fontu</p>
+                    <div class="text-2xl font-display text-gray-800 mb-8">Aa Bb Cc Dd Ee Ff 0123456789</div>
+                    <a href="https://fonts.google.com/specimen/Space+Grotesk" target="_blank" class="inline-block px-6 py-3 text-xs font-bold text-white bg-brand-black rounded-lg hover:bg-brand-green hover:text-black transition-colors">GOOGLE FONTS ↗</a>
+                </div>
+                <div class="p-10 bg-white rounded-3xl border border-gray-200 relative overflow-hidden shadow-xl">
+                    <h4 class="text-3xl font-sans font-bold text-gray-900 mb-2">Inter</h4>
+                    <p class="text-xs text-gray-500 mb-6 font-mono tracking-widest uppercase">Gövde Metni Fontu</p>
+                    <div class="text-2xl font-sans text-gray-800 mb-8">Aa Bb Cc Dd Ee Ff 0123456789</div>
+                    <a href="https://fonts.google.com/specimen/Inter" target="_blank" class="inline-block px-6 py-3 text-xs font-bold text-brand-black bg-gray-100 border border-gray-200 rounded-lg hover:bg-brand-black hover:text-white transition-colors">GOOGLE FONTS ↗</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Uygulamalar (Avatar, Supergraphic vs) -->
+    <section id="applications" class="py-20 bg-brand-black text-white relative overflow-hidden border-t border-white/10">
+        <div class="absolute inset-0 bg-grid-dark opacity-10 pointer-events-none"></div>
+        <div class="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 class="text-sm font-bold tracking-widest text-brand-green uppercase mb-3 text-center">05. Uygulamalar</h2>
+            <h3 class="text-3xl md:text-4xl font-display font-bold text-center mb-16">Avatar ve Arka Plan Görselleri.</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+                <!-- Avatar -->
+                <div class="bg-[#151515] rounded-xl border border-gray-800 p-8 flex flex-col items-center shadow-lg">
+                    <div class="h-48 w-full rounded-lg bg-black/50 mb-8 flex items-center justify-center relative overflow-hidden border border-gray-700">
+                        <div class="w-28 h-28 rounded-full border border-gray-600 bg-[#111] flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                            <svg width="50" height="50" viewBox="0 0 100 100" fill="none">
+                                <g transform="translate(0, -5) scale(1)">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#F8FAFC"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <h5 class="text-white font-bold text-base mb-1 font-display text-center">Kurumsal Avatar</h5>
+                    <div class="flex gap-2 w-full mt-auto">
+                        <button onclick="triggerDownload('OnScala_Avatar.png', 'png')" class="flex-1 py-2 bg-[#222] text-white rounded text-center hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">PNG</button>
+                        <button onclick="triggerDownload('OnScala_Avatar.svg', 'svg')" class="flex-1 py-2 bg-[#222] text-white rounded text-center hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">SVG</button>
+                    </div>
+                </div>
+
+                <!-- Süpergrafik -->
+                <div class="bg-[#151515] rounded-xl border border-gray-800 p-8 flex flex-col items-center shadow-lg">
+                    <div class="h-48 w-full rounded-lg bg-[#000] mb-8 relative overflow-hidden border border-gray-700">
+                        <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" class="absolute -top-12 -left-12 opacity-80 transform scale-[3]">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#1A1A1A"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#050505"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                        </svg>
+                    </div>
+                    <h5 class="text-white font-bold text-base mb-1 font-display text-center">Makro Süpergrafik</h5>
+                    <div class="flex gap-2 w-full mt-auto">
+                        <button onclick="triggerDownload('OnScala_Supergraphic_Arkaplan.png', 'png')" class="flex-1 py-2 bg-[#222] text-white rounded text-center hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">PNG</button>
+                        <button onclick="triggerDownload('OnScala_Supergraphic_Arkaplan.svg', 'svg')" class="flex-1 py-2 bg-[#222] text-white rounded text-center hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">SVG</button>
+                    </div>
+                </div>
+
+                <!-- Pattern -->
+                <div class="bg-[#151515] rounded-xl border border-gray-800 p-8 flex flex-col items-center shadow-lg">
+                    <div class="h-48 w-full rounded-lg bg-[#0a0a0a] mb-8 relative overflow-hidden border border-gray-700">
+                        <svg width="100%" height="100%">
+                            <pattern id="cube-pattern-disp" x="0" y="0" width="60" height="34" patternUnits="userSpaceOnUse">
+                                <g transform="scale(0.3)"><path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z" fill="#1a1a1a"/><path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 48 94 L 48 51 Z" fill="#0a0a0a"/><path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 72 L 52 94 Z" fill="#111111"/></g>
+                                <g transform="scale(0.3) translate(100,58)"><path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z" fill="#1a1a1a"/><path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 48 94 L 48 51 Z" fill="#0a0a0a"/><path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 72 L 52 94 Z" fill="#111111"/></g>
+                            </pattern>
+                            <rect width="100%" height="100%" fill="url(#cube-pattern-disp)" />
+                        </svg>
+                    </div>
+                    <h5 class="text-white font-bold text-base mb-1 font-display text-center">İzometrik Pattern</h5>
+                    <div class="flex gap-2 w-full mt-auto">
+                        <button onclick="triggerDownload('OnScala_Pattern_Arkaplan.png', 'png')" class="flex-1 py-2 bg-[#222] text-white rounded text-center hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">PNG</button>
+                        <button onclick="triggerDownload('OnScala_Pattern_Arkaplan.svg', 'svg')" class="flex-1 py-2 bg-[#222] text-white rounded text-center hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">SVG</button>
+                    </div>
+                </div>
+
+                <!-- Wireframe -->
+                <div class="bg-[#151515] rounded-xl border border-gray-800 p-8 flex flex-col items-center shadow-lg">
+                    <div class="h-48 w-full rounded-lg bg-brand-green/5 border border-brand-green/20 mb-8 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-grid opacity-20 pointer-events-none"></div>
+                        <svg width="100" height="100" viewBox="0 0 100 100" fill="none" class="relative z-10">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" stroke="#00F060" stroke-width="2"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" stroke="#00F060" stroke-width="2"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" stroke="#00F060" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h5 class="text-white font-bold text-base mb-1 font-display text-center">Wireframe Lazer</h5>
+                    <div class="flex gap-2 w-full mt-auto">
+                        <button onclick="triggerDownload('OnScala_Wireframe.png', 'png')" class="flex-1 py-2 bg-[#222] text-white rounded text-center hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">PNG</button>
+                        <button onclick="triggerDownload('OnScala_Wireframe.svg', 'svg')" class="flex-1 py-2 bg-[#222] text-white rounded text-center hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">SVG</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Materyaller & Şablonlar -->
+    <section id="materials" class="py-24 bg-brand-light relative overflow-visible">
+        <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
+        <div class="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-bold tracking-widest text-brand-green uppercase mb-3">06. Materyaller</h2>
+                <h3 class="text-3xl md:text-4xl font-display font-bold text-brand-black">Kartvizit ve Yaka Kartı.</h3>
+            </div>
+
+            <!-- KARTVİZİTLER -->
+            <div class="mb-16 bg-white rounded-[2rem] p-10 lg:p-16 shadow-xl border border-gray-200">
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-16 xl:gap-10">
+                    
+                    <!-- Koyu (Dark) -->
+                    <div class="flex flex-col items-center w-full">
+                        <h5 class="font-display font-bold text-lg mb-8 text-gray-800">KOYU (DARK) ELEGANS</h5>
+                        <div class="flex flex-col gap-6 w-full items-center">
+                            <!-- Ön Yüz -->
+                            <div class="w-[300px] h-[170px] bg-[#111111] rounded-xl shadow-xl flex items-center justify-center border border-gray-800 relative">
+                                <svg width="150" height="60" viewBox="0 0 350 120" fill="none" class="relative z-10">
+                                    <g transform="translate(10, 0) scale(0.9)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#F8FAFC"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                    </g>
+                                    <text x="100" y="60" font-family="'Space Grotesk', Helvetica, Arial, sans-serif" font-weight="700" font-size="36" fill="#FFF">OnScala.</text>
+                                    <text x="103" y="80" font-family="'Inter', Helvetica, Arial, sans-serif" font-weight="600" font-size="10" letter-spacing="3" fill="#00F060">SCALE TO 1:1</text>
+                                </svg>
+                            </div>
+                            <!-- Arka Yüz (KISALTMALAR KALDIRILDI) -->
+                            <div class="w-[300px] h-[170px] bg-[#1a1a1a] rounded-xl shadow-lg border border-gray-800 p-6 flex flex-col justify-between relative overflow-hidden">
+                                <div class="w-12 h-1.5 bg-brand-green absolute top-0 right-6 rounded-b-sm shadow-[0_0_10px_rgba(0,240,96,0.2)]"></div>
+                                <div class="relative z-10 flex flex-col h-full">
+                                    <div class="mb-2">
+                                        <div class="font-display font-bold text-[14px] tracking-[0.15em] text-white uppercase">Çağrı Aslum</div>
+                                        <div class="text-[6.5px] text-brand-green font-mono mt-1 font-bold tracking-widest">KURUCU ORTAK / CO-FOUNDER</div>
+                                    </div>
+                                    <div class="w-2/3 h-px bg-gradient-to-r from-gray-700 to-transparent my-1.5"></div>
+                                    <div class="flex justify-between items-end flex-grow">
+                                        <div class="flex flex-col gap-1 text-[7.5px] text-gray-400 font-sans mt-1">
+                                            <div class="flex items-center text-white">+90 506 201 99 95</div>
+                                            <div class="flex items-center text-white">cagri.aslum@onscala.com</div>
+                                            <div class="flex items-center text-white">info@onscala.com</div>
+                                            <div class="flex items-center text-white">onscala.com</div>
+                                        </div>
+                                        <div class="flex flex-col items-center gap-1 mb-0.5">
+                                            <div class="w-[38px] h-[38px] bg-white p-1 rounded-sm shadow-md flex justify-center items-center">
+                                                <svg viewBox="0 0 20 20" fill="#111" class="w-full h-full">
+                                                    <rect width="6" height="6"/><rect x="14" width="6" height="6"/><rect y="14" width="6" height="6"/>
+                                                    <rect x="2" y="2" width="2" height="2" fill="#fff"/><rect x="16" y="2" width="2" height="2" fill="#fff"/><rect x="2" y="16" width="2" height="2" fill="#fff"/>
+                                                    <rect x="8" y="8" width="4" height="4"/><rect x="16" y="10" width="2" height="2"/><rect x="10" y="16" width="2" height="2"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 flex flex-col w-full z-20 gap-3">
+                            <div class="bg-[#151515] p-2.5 rounded-lg border border-gray-800 flex flex-col gap-2">
+                                <span class="text-[10px] text-gray-300 font-mono font-bold border-b border-gray-800 pb-1">Çağrı Aslum</span>
+                                <div class="flex gap-1.5 justify-center">
+                                    <button onclick="triggerDownload('OnScala_Kartvizit_Koyu_CagriAslum.png', 'png_card')" class="flex-1 py-1 rounded bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-colors">PNG</button>
+                                    <button onclick="triggerDownload('OnScala_Kartvizit_Koyu_CagriAslum.svg', 'svg_card')" class="flex-1 py-1 rounded bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-colors">SVG</button>
+                                </div>
+                            </div>
+                            <div class="bg-[#151515] p-2.5 rounded-lg border border-gray-800 flex flex-col gap-2">
+                                <span class="text-[10px] text-gray-300 font-mono font-bold border-b border-gray-800 pb-1">Akif Birdal</span>
+                                <div class="flex gap-1.5 justify-center">
+                                    <button onclick="triggerDownload('OnScala_Kartvizit_Koyu_AkifBirdal.png', 'png_card')" class="flex-1 py-1 rounded bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-colors">PNG</button>
+                                    <button onclick="triggerDownload('OnScala_Kartvizit_Koyu_AkifBirdal.svg', 'svg_card')" class="flex-1 py-1 rounded bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-colors">SVG</button>
+                                </div>
+                            </div>
+                            <div class="bg-[#151515] p-2.5 rounded-lg border border-gray-800 flex flex-col gap-2">
+                                <span class="text-[10px] text-gray-300 font-mono font-bold border-b border-gray-800 pb-1">Ahmet Birdal</span>
+                                <div class="flex gap-1.5 justify-center">
+                                    <button onclick="triggerDownload('OnScala_Kartvizit_Koyu_AhmetBirdal.png', 'png_card')" class="flex-1 py-1 rounded bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-colors">PNG</button>
+                                    <button onclick="triggerDownload('OnScala_Kartvizit_Koyu_AhmetBirdal.svg', 'svg_card')" class="flex-1 py-1 rounded bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-colors">SVG</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Açık (Light) Minimal -->
+                    <div class="flex flex-col items-center w-full">
+                        <h5 class="font-display font-bold text-lg mb-8 text-gray-800">AÇIK (LIGHT) MİNİMAL</h5>
+                        <div class="flex flex-col gap-6 w-full items-center">
+                            <!-- Ön Yüz -->
+                            <div class="w-[300px] h-[170px] bg-[#F8FAFC] rounded-xl shadow-xl flex items-center justify-center border border-gray-200 relative">
+                                <svg width="150" height="60" viewBox="0 0 350 120" fill="none" class="relative z-10">
+                                    <g transform="translate(10, 0) scale(0.9)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#111111"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                    </g>
+                                    <text x="100" y="60" font-family="'Space Grotesk', Helvetica, Arial, sans-serif" font-weight="700" font-size="36" fill="#111">OnScala.</text>
+                                    <text x="103" y="80" font-family="'Inter', Helvetica, Arial, sans-serif" font-weight="600" font-size="10" letter-spacing="3" fill="#00F060">SCALE TO 1:1</text>
+                                </svg>
+                            </div>
+                            <!-- Arka Yüz (KISALTMALAR KALDIRILDI) -->
+                            <div class="w-[300px] h-[170px] bg-white rounded-xl shadow-lg border border-gray-200 p-6 flex flex-col justify-between relative overflow-hidden">
+                                <div class="w-12 h-1.5 bg-brand-black absolute top-0 right-6 rounded-b-sm"></div>
+                                <div class="relative z-10 flex flex-col h-full">
+                                    <div class="mb-2">
+                                        <div class="font-display font-bold text-[14px] tracking-[0.15em] text-brand-black uppercase">Akif Birdal</div>
+                                        <div class="text-[6.5px] text-brand-green font-mono mt-1 font-bold tracking-widest">KURUCU ORTAK / CO-FOUNDER</div>
+                                    </div>
+                                    <div class="w-2/3 h-px bg-gradient-to-r from-gray-200 to-transparent my-1.5"></div>
+                                    <div class="flex justify-between items-end flex-grow">
+                                        <div class="flex flex-col gap-1 text-[7.5px] text-gray-500 font-sans mt-1">
+                                            <div class="flex items-center text-black">+90 544 936 00 01</div>
+                                            <div class="flex items-center text-black">akif.birdal@onscala.com</div>
+                                            <div class="flex items-center text-black">info@onscala.com</div>
+                                            <div class="flex items-center text-black">onscala.com</div>
+                                        </div>
+                                        <div class="flex flex-col items-center gap-1 mb-0.5">
+                                            <div class="w-[38px] h-[38px] bg-gray-100 p-1 rounded-sm border border-gray-200 flex justify-center items-center">
+                                                <svg viewBox="0 0 20 20" fill="#111" class="w-full h-full"><rect width="6" height="6"/><rect x="14" width="6" height="6"/><rect y="14" width="6" height="6"/><rect x="8" y="8" width="4" height="4"/><rect x="16" y="10" width="2" height="2"/><rect x="10" y="16" width="2" height="2"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex gap-2 w-full">
+                            <button onclick="triggerDownload('OnScala_Kartvizit_Acik.png', 'png_card_light')" class="flex-1 py-2 rounded bg-gray-100 text-black hover:bg-brand-green font-mono text-[10px] font-bold">AÇIK KART (PNG)</button>
+                            <button onclick="triggerDownload('OnScala_Kartvizit_Acik.svg', 'svg_card_light')" class="flex-1 py-2 rounded bg-gray-100 text-black hover:bg-brand-green font-mono text-[10px] font-bold">SVG ŞABLON</button>
+                        </div>
+                    </div>
+
+                    <!-- Titanyum -->
+                    <div class="flex flex-col items-center w-full">
+                        <h5 class="font-display font-bold text-lg mb-8 text-gray-800">TİTANYUM (PREMIUM)</h5>
+                        <div class="flex flex-col gap-6 w-full items-center">
+                            <!-- Ön Yüz -->
+                            <div class="w-[300px] h-[170px] bg-[#2A2F35] rounded-xl shadow-xl flex items-center justify-center border border-gray-700 relative">
+                                <svg width="150" height="60" viewBox="0 0 350 120" fill="none" class="relative z-10">
+                                    <g transform="translate(10, 0) scale(0.9)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#94A3B8"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#CBD5E1"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#64748B"/>
+                                    </g>
+                                    <text x="100" y="60" font-family="'Space Grotesk', Helvetica, Arial, sans-serif" font-weight="700" font-size="36" fill="#F8FAFC">OnScala.</text>
+                                    <text x="103" y="80" font-family="'Inter', Helvetica, Arial, sans-serif" font-weight="600" font-size="10" letter-spacing="3" fill="#94A3B8">SCALE TO 1:1</text>
+                                </svg>
+                            </div>
+                            <!-- Arka Yüz (KISALTMALAR KALDIRILDI) -->
+                            <div class="w-[300px] h-[170px] bg-[#1E2328] rounded-xl shadow-lg border border-gray-700 p-6 flex flex-col justify-between relative overflow-hidden">
+                                <div class="w-12 h-1.5 bg-[#94A3B8] absolute top-0 right-6 rounded-b-sm"></div>
+                                <div class="relative z-10 flex flex-col h-full">
+                                    <div class="mb-2">
+                                        <div class="font-display font-bold text-[14px] tracking-[0.15em] text-[#CBD5E1] uppercase">Çağrı Aslum</div>
+                                        <div class="text-[6.5px] text-[#94A3B8] font-mono mt-1 font-bold tracking-widest">KURUCU ORTAK / CO-FOUNDER</div>
+                                    </div>
+                                    <div class="w-2/3 h-px bg-gradient-to-r from-gray-600 to-transparent my-1.5"></div>
+                                    <div class="flex justify-between items-end flex-grow">
+                                        <div class="flex flex-col gap-1 text-[7.5px] text-gray-500 font-sans mt-1">
+                                            <div class="flex items-center text-[#CBD5E1]">+90 506 201 99 95</div>
+                                            <div class="flex items-center text-[#CBD5E1]">cagri.aslum@onscala.com</div>
+                                            <div class="flex items-center text-[#CBD5E1]">info@onscala.com</div>
+                                            <div class="flex items-center text-[#CBD5E1]">onscala.com</div>
+                                        </div>
+                                        <div class="flex flex-col items-center gap-1 mb-0.5">
+                                            <div class="w-[38px] h-[38px] bg-white p-1 rounded-sm shadow-md flex justify-center items-center">
+                                                <svg viewBox="0 0 20 20" fill="#111" class="w-full h-full"><rect width="6" height="6"/><rect x="14" width="6" height="6"/><rect y="14" width="6" height="6"/><rect x="8" y="8" width="4" height="4"/><rect x="16" y="10" width="2" height="2"/><rect x="10" y="16" width="2" height="2"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex gap-2 w-full">
+                            <button onclick="triggerDownload('OnScala_Kartvizit_Titanyum.png', 'png_card_titanium')" class="flex-1 py-2 rounded bg-[#2A2F35] text-white hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">TİTANYUM KART (PNG)</button>
+                            <button onclick="triggerDownload('OnScala_Kartvizit_Titanyum.svg', 'svg_card_titanium')" class="flex-1 py-2 rounded bg-[#2A2F35] text-white hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">SVG ŞABLON</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YAKA KARTLARI -->
+            <div class="mb-16 bg-white rounded-[2rem] p-10 lg:p-16 shadow-xl border border-gray-200">
+                <div class="flex flex-col xl:flex-row gap-16 justify-center items-start">
+                    
+                    <!-- Koyu Yaka Kartı (Fotoğrafsız Yeni Nesil - KAPSÜL YOK) -->
+                    <div class="flex flex-col items-center w-full max-w-sm">
+                        <h5 class="font-display font-bold text-lg mb-8 text-gray-800">YAKA KARTI (DARK)</h5>
+                        <div class="flex flex-col sm:flex-row gap-8 mb-8">
+                            <!-- Ön Yüz -->
+                            <div class="w-[190px] h-[290px] bg-[#111111] rounded-[16px] relative overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.4)] border border-gray-800 flex flex-col">
+                                <div class="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-2 bg-[#222] rounded-full z-30"></div>
+                                <div class="px-5 pt-8 flex flex-col items-start relative z-10">
+                                    <svg width="24" height="24" viewBox="0 0 100 100" fill="none" class="mb-1.5">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#FFF"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                    </svg>
+                                    <div class="text-[12px] text-white font-bold tracking-widest font-display">ONSCALA.</div>
+                                </div>
+                                <div class="px-5 mt-4 relative z-10 flex-grow">
+                                    <div class="text-[22px] leading-tight font-display font-medium text-white tracking-tight">çağrı<br>aslum</div>
+                                    <div class="text-[5px] font-mono text-brand-green tracking-[0.1em] mt-2 uppercase font-bold">KURUCU ORTAK / CO-FOUNDER</div>
+                                </div>
+                                <svg class="absolute bottom-0 left-0 w-full h-[80px]" viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M-10,50 Q 40,-10 110,50" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.1"/></svg>
+                                <div class="absolute bottom-4 right-4 w-[45px] h-[70px] bg-[#111] rounded-xl border border-gray-700 p-1.5 flex flex-col justify-center items-center z-20">
+                                    <div class="text-[4px] font-mono text-white tracking-widest mb-1 font-bold">SCAN</div>
+                                    <div class="w-full aspect-square bg-white rounded-md p-1"><svg viewBox="0 0 20 20" fill="#111"><rect width="5" height="5"/><rect x="15" width="5" height="5"/><rect y="15" width="5" height="5"/></svg></div>
+                                </div>
+                            </div>
+                            <!-- Arka Yüz (Sadece Logo + Web) -->
+                            <div class="w-[190px] h-[290px] bg-[#151515] rounded-[16px] relative overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.3)] border border-gray-800 flex flex-col">
+                                <div class="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-2 bg-[#2a2a2a] rounded-full z-30"></div>
+                                <div class="flex-grow flex flex-col items-center justify-center relative z-10 mt-6">
+                                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" class="mb-3">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#FFF"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                    </svg>
+                                    <div class="text-[14px] text-white font-bold tracking-widest font-display">OnScala.</div>
+                                    <div class="text-[5px] text-brand-green font-mono mt-1 font-bold tracking-[0.2em]">SCALE TO 1:1</div>
+                                </div>
+                                <div class="w-full text-center pb-8 z-10"><div class="text-[7px] text-gray-500 font-mono tracking-widest uppercase">www.onscala.com</div></div>
+                            </div>
+                        </div>
+
+                        <!-- İndirme -->
+                        <div class="w-full flex flex-col gap-2">
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-200">
+                                <span class="text-[10px] font-bold text-gray-700">Çağrı Aslum</span>
+                                <div class="flex gap-1">
+                                    <button onclick="triggerDownload('OnScala_YakaKarti_Koyu_CagriAslum.png', 'png_yaka')" class="px-2 py-1 bg-gray-800 text-white hover:bg-brand-green hover:text-black rounded text-[9px] font-mono font-bold">PNG</button>
+                                    <button onclick="triggerDownload('OnScala_YakaKarti_Koyu_CagriAslum.svg', 'svg_yaka')" class="px-2 py-1 bg-gray-800 text-white hover:bg-brand-green hover:text-black rounded text-[9px] font-mono font-bold">SVG</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-200">
+                                <span class="text-[10px] font-bold text-gray-700">Akif Birdal</span>
+                                <div class="flex gap-1">
+                                    <button onclick="triggerDownload('OnScala_YakaKarti_Koyu_AkifBirdal.png', 'png_yaka')" class="px-2 py-1 bg-gray-800 text-white hover:bg-brand-green hover:text-black rounded text-[9px] font-mono font-bold">PNG</button>
+                                    <button onclick="triggerDownload('OnScala_YakaKarti_Koyu_AkifBirdal.svg', 'svg_yaka')" class="px-2 py-1 bg-gray-800 text-white hover:bg-brand-green hover:text-black rounded text-[9px] font-mono font-bold">SVG</button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-200">
+                                <span class="text-[10px] font-bold text-gray-700">Ahmet Birdal</span>
+                                <div class="flex gap-1">
+                                    <button onclick="triggerDownload('OnScala_YakaKarti_Koyu_AhmetBirdal.png', 'png_yaka')" class="px-2 py-1 bg-gray-800 text-white hover:bg-brand-green hover:text-black rounded text-[9px] font-mono font-bold">PNG</button>
+                                    <button onclick="triggerDownload('OnScala_YakaKarti_Koyu_AhmetBirdal.svg', 'svg_yaka')" class="px-2 py-1 bg-gray-800 text-white hover:bg-brand-green hover:text-black rounded text-[9px] font-mono font-bold">SVG</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Açık Yaka Kartı -->
+                    <div class="flex flex-col items-center w-full max-w-sm">
+                        <h5 class="font-display font-bold text-lg mb-8 text-gray-800">YAKA KARTI (LIGHT)</h5>
+                        <div class="flex flex-col sm:flex-row gap-8 mb-8">
+                            <!-- Ön Yüz -->
+                            <div class="w-[190px] h-[290px] bg-[#F8FAFC] rounded-[16px] relative overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] border border-gray-200 flex flex-col">
+                                <div class="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-2 bg-gray-200 rounded-full z-30"></div>
+                                <div class="px-5 pt-8 flex flex-col items-start relative z-10">
+                                    <svg width="24" height="24" viewBox="0 0 100 100" fill="none" class="mb-1.5">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#111"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                    </svg>
+                                    <div class="text-[12px] text-brand-black font-bold tracking-widest font-display">ONSCALA.</div>
+                                </div>
+                                <div class="px-5 mt-4 relative z-10 flex-grow">
+                                    <div class="text-[22px] leading-tight font-display font-medium text-brand-black tracking-tight">akif<br>birdal</div>
+                                    <div class="text-[5px] font-mono text-brand-green tracking-[0.1em] mt-2 uppercase font-bold">KURUCU ORTAK / CO-FOUNDER</div>
+                                </div>
+                                <svg class="absolute bottom-0 left-0 w-full h-[80px]" viewBox="0 0 100 50" preserveAspectRatio="none"><path d="M-10,50 L-10,35 Q 40,-10 110,50 Z" fill="#111111"/></svg>
+                                <div class="absolute bottom-4 right-4 w-[45px] h-[70px] bg-[#111] rounded-xl border border-gray-800 p-1.5 flex flex-col justify-center items-center z-20">
+                                    <div class="text-[4px] font-mono text-white tracking-widest mb-1 font-bold">SCAN</div>
+                                    <div class="w-full aspect-square bg-white rounded-md p-1"><svg viewBox="0 0 20 20" fill="#111"><rect width="5" height="5"/><rect x="15" width="5" height="5"/><rect y="15" width="5" height="5"/></svg></div>
+                                </div>
+                            </div>
+                            <!-- Arka Yüz -->
+                            <div class="w-[190px] h-[290px] bg-white rounded-[16px] relative overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] border border-gray-200 flex flex-col">
+                                <div class="absolute top-2 left-1/2 -translate-x-1/2 w-12 h-2 bg-gray-200 rounded-full z-30"></div>
+                                <div class="flex-grow flex flex-col items-center justify-center relative z-10 mt-6">
+                                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" class="mb-3">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#111"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                    </svg>
+                                    <div class="text-[14px] text-brand-black font-bold tracking-widest font-display">OnScala.</div>
+                                    <div class="text-[5px] text-brand-green font-mono mt-1 font-bold tracking-[0.2em]">SCALE TO 1:1</div>
+                                </div>
+                                <div class="w-full text-center pb-8 z-10"><div class="text-[7px] text-gray-500 font-mono tracking-widest uppercase">www.onscala.com</div></div>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex gap-2 w-full">
+                            <button onclick="triggerDownload('OnScala_YakaKarti_Acik.png', 'png_yaka_light')" class="flex-1 py-2 bg-gray-100 text-black hover:bg-brand-green font-mono text-[10px] font-bold rounded">AÇIK YAKA (PNG)</button>
+                            <button onclick="triggerDownload('OnScala_YakaKarti_Acik.svg', 'svg_yaka_light')" class="flex-1 py-2 bg-gray-100 text-black hover:bg-brand-green font-mono text-[10px] font-bold rounded">SVG ŞABLON</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Antetli & E-Mail İmzası -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+                <div class="bg-gray-100 p-8 rounded-2xl border border-gray-200 flex flex-col sm:flex-row items-center gap-10">
+                    <div class="bg-white w-[210px] h-[297px] shadow-lg p-6 flex flex-col justify-between shrink-0">
+                        <div class="border-b border-gray-100 pb-3 flex justify-between">
+                            <svg width="60" height="20" viewBox="0 0 350 100" fill="none">
+                                <g transform="scale(0.9)">
+                                    <path d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                    <path d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#111111"/>
+                                    <path d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                </g>
+                                <text x="100" y="60" font-family="'Space Grotesk', Helvetica, Arial, sans-serif" font-weight="700" font-size="36" fill="#111">OnScala.</text>
+                            </svg>
+                        </div>
+                        <div class="border-t border-brand-green pt-3 text-[5px] text-gray-500 font-mono flex justify-between"><span>ONSCALA.COM</span><span>+90 212 555 0000</span></div>
+                    </div>
+                    <div class="w-full text-center sm:text-left">
+                        <h4 class="text-lg font-bold mb-2 font-display">Kurumsal Antetli (A4)</h4>
+                        <div class="mt-4 flex gap-2">
+                            <button onclick="triggerDownload('OnScala_Antetli_A4.pdf', 'pdf')" class="px-4 py-2 rounded-md bg-black text-white hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">PDF İNDİR</button>
+                            <button onclick="triggerDownload('OnScala_Antetli_A4.svg', 'svg')" class="px-4 py-2 rounded-md bg-black text-white hover:bg-brand-green hover:text-black font-mono text-[10px] font-bold">SVG İNDİR</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-gray-200 flex flex-col items-start justify-center h-full">
+                    <h4 class="text-xl font-bold mb-4 font-display">E-Posta İmzası (Retina PNG)</h4>
+                    <p class="text-xs text-gray-500 mb-6">Şirketinizin tüm resmi e-posta iletişimleri için tasarlanmış, iletişim kısaltmaları kaldırılmış yüksek çözünürlüklü imza şablonları.</p>
+                    <div class="w-full bg-brand-light p-6 rounded-lg border border-gray-200 mb-6">
+                        <div style="font-family: Arial, sans-serif; display: flex; align-items: center;">
+                            <div style="border-right: 2px solid #00F060; padding-right: 15px; margin-right: 15px;">
+                                <svg width="40" height="40" viewBox="0 0 100 100" fill="none">
+                                    <g transform="translate(0, -5) scale(1)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" fill="#64748B"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" fill="#111111"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" fill="#00F060"/>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div>
+                                <div style="font-size: 16px; font-weight: bold; color: #111;">Çağrı Aslum</div>
+                                <div style="font-size: 10px; color: #64748B; margin-bottom: 4px;">Kurucu Ortak / Co-Founder</div>
+                                <!-- Kısaltmaları kaldırılmış saf bilgi görünümü -->
+                                <div style="font-size: 9px; color: #888; line-height: 1.5;">
+                                    +90 506 201 99 95<br>
+                                    cagri.aslum@onscala.com<br>
+                                    onscala.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 w-full">
+                        <button onclick="triggerDownload('OnScala_Email_CagriAslum.png', 'png_email')" class="py-2.5 rounded-md bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-all">ÇAĞRI (PNG)</button>
+                        <button onclick="triggerDownload('OnScala_Email_AkifBirdal.png', 'png_email')" class="py-2.5 rounded-md bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-all">AKİF (PNG)</button>
+                        <button onclick="triggerDownload('OnScala_Email_AhmetBirdal.png', 'png_email')" class="py-2.5 rounded-md bg-[#111] text-white hover:bg-brand-green hover:text-black font-mono text-[9px] font-bold transition-all">AHMET (PNG)</button>
+                        <button onclick="triggerDownload('OnScala_Email_Kurumsal.png', 'png_email')" class="py-2.5 rounded-md bg-brand-green text-black hover:bg-[#111] hover:text-white font-mono text-[9px] font-bold transition-all">KURUMSAL İMZA (PNG)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3D Katalog & Z-Fold -->
+    <section class="py-24 bg-brand-black overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-20">
+                <h3 class="text-4xl font-display font-bold text-white mb-4">Basılı Yayın Stüdyosu</h3>
+                <p class="text-gray-500">Premium kağıt dokusu ve milimetrik mizanpaj. InDesign & PDF şablonları.</p>
+            </div>
+
+            <!-- Katalog Mockup -->
+            <div class="flex flex-col xl:flex-row items-center justify-center gap-16 mb-32">
+                <div class="w-[260px] h-[360px] bg-[#111] rounded-r-xl shadow-[0_30px_60px_rgba(0,0,0,0.8)] relative border-l-8 border-black">
+                    <div class="p-8">
+                        <svg width="60" height="20" viewBox="0 0 100 100"><path fill-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z" fill="#64748B"/></svg>
+                        <div class="mt-40 text-white font-display font-bold text-2xl">PRECISION<br>PORTFOLIO</div>
+                    </div>
+                </div>
+                <div class="flex gap-1 shadow-[0_30px_60px_rgba(0,0,0,0.8)]">
+                    <div class="w-[260px] h-[360px] bg-[#111] p-8 border-r border-white/5 rounded-l-md">
+                        <div class="h-2 w-12 bg-brand-green mb-4"></div>
+                        <div class="text-white text-3xl font-bold font-display">MK-VII</div>
+                        <div class="text-[10px] text-gray-500 mt-4 leading-relaxed">Milimetrik üretim hassasiyeti ile geliştirilmiş prototip teknikleri.</div>
+                    </div>
+                    <div class="w-[260px] h-[360px] bg-[#f8fafc] p-8 rounded-r-md">
+                        <div class="w-full h-full bg-gray-200 rounded-full flex items-center justify-center grayscale opacity-50">
+                             <span class="text-[10px] font-mono">VISUAL_ASSET_01</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Z-Fold Mockup -->
+            <div class="zfold-scene flex justify-center py-20">
+                <div class="zfold-wrapper flex cursor-pointer drop-shadow-[0_60px_80px_rgba(0,0,0,0.9)]">
+                    <div class="w-[180px] h-[480px] bg-[#111] zfold-p1 rounded-l-lg border border-white/10 p-8 flex flex-col justify-between">
+                         <div class="text-white font-bold text-xl uppercase tracking-tighter">OnScala.</div>
+                         <div class="text-white text-4xl font-display font-bold leading-tight">ENGI<br>NEER<br>ED.</div>
+                    </div>
+                    <div class="w-[180px] h-[480px] bg-white zfold-p2 border-y border-gray-200 p-8">
+                         <div class="text-black font-display font-bold text-2xl">Scale To 1:1</div>
+                    </div>
+                    <div class="w-[180px] h-[480px] bg-brand-green zfold-p3 rounded-r-lg border border-brand-green p-8">
+                         <div class="text-black font-display font-bold text-2xl">READY FOR<br>PHYSICAL.</div>
+                    </div>
+                </div>
             </div>
             
-            <nav class="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
-                <a href="#kapsam" class="hover:text-brand-primary transition-colors">Proje Kapsamı</a>
-                <a href="#neden-biz" class="hover:text-brand-primary transition-colors">Neden Biz?</a>
-                <a href="#takvim" class="hover:text-brand-primary transition-colors">Takvim</a>
-                <a href="#yatirim" class="hover:text-brand-primary transition-colors">Yatırım</a>
-            </nav>
-
-            <a href="https://wa.me/905079448462" target="_blank" rel="noopener noreferrer" class="bg-brand-primary/10 border border-brand-primary/30 hover:bg-brand-primary hover:text-brand-bg text-brand-primary px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300">
-                <i class="fab fa-whatsapp mr-1"></i> Teklifi Onayla
-            </a>
+            <div class="flex justify-center gap-4 mt-8 relative z-10">
+                <button onclick="triggerDownload('OnScala_Katalog.png', 'png_print')" class="px-8 py-3 bg-white text-black font-bold font-mono text-xs rounded hover:bg-brand-green transition-all">KATALOG İNDİR (ZIP)</button>
+                <button onclick="triggerDownload('OnScala_ZFold.png', 'png_print')" class="px-8 py-3 bg-white text-black font-bold font-mono text-xs rounded hover:bg-brand-green transition-all">Z-FOLD İNDİR (ZIP)</button>
+            </div>
         </div>
-    </header>
+    </section>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-32 md:py-40 space-y-32">
-        
-        <!-- Hero Section -->
-        <section class="relative z-10 flex flex-col lg:flex-row items-center justify-between min-h-[60vh] gap-12">
-            <div class="w-full lg:w-3/5 space-y-8 text-center lg:text-left reveal active">
-                <div class="inline-flex items-center gap-2 glass-premium !rounded-full px-5 py-2.5 text-xs md:text-sm font-medium mb-2 border border-brand-primary/20 text-brand-primary">
-                    <i class="fas fa-shield-check"></i>
-                    Kurumsal İtibar & Yapay Zeka Optimizasyonu
-                </div>
-                
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] tracking-tight text-white">
-                    Mali Müşavirliğin <br/>
-                    <span class="text-gradient-gold">Yeni Nesil</span> Yüzü.
-                </h1>
-                
-                <p class="text-lg text-slate-400 max-w-2xl font-light leading-relaxed mx-auto lg:mx-0">
-                    Sektörel uzmanlığınızı dijitale taşıyoruz. WordPress tabanlı premium web mimarisi, sıfır iş yükü ile içerik üretimi ve yapay zeka destekli görünürlük ile markanızı büyütüyoruz.
-                </p>
-
-                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
-                    <a href="#kapsam" class="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-primary text-brand-bg font-bold hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(251,191,36,0.3)]">
-                        Kapsamı İncele <i class="fas fa-arrow-down"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Abstract 3D/Finance Visual Placeholder -->
-            <div class="w-full lg:w-2/5 relative flex justify-center items-center h-[300px] md:h-[400px] z-10 pointer-events-none reveal active">
-                <div class="absolute inset-0 bg-brand-secondary/20 blur-[100px] rounded-full mix-blend-screen animate-pulse-glow"></div>
-                <!-- Image representing finance/accounting -->
-                <img src="https://www.atikeryazilim.com.tr/upload/ck_e35cc5fb-f803-45c0-ae2e-cf26b8c1c20e_ck_78bde56c-f839-40ee-bda4-e78333c3fad1_MUHASEBE-compressor.png" 
-                     alt="Bütçe ve Muhasebe İllüstrasyonu" 
-                     class="w-[130%] max-w-[600px] object-contain drop-shadow-[0_20px_50px_rgba(45,212,191,0.2)] animate-float-slow">
-            </div>
-        </section>
-
-        <!-- Kapsam Section -->
-        <section id="kapsam" class="pt-10 reveal">
-            <div class="text-center space-y-4 mb-16">
-                <h2 class="text-4xl md:text-5xl font-display font-bold text-white text-glow-gold">Bütünleşik Dijital Ekosistem</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto text-lg font-light">Mali müşavirlik vizyonunuza yakışır, A'dan Z'ye anahtar teslim hizmet modüllerimiz.</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                
-                <!-- Web & WordPress -->
-                <div class="glass-premium p-8 group">
-                    <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-xl text-blue-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fab fa-wordpress"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3 font-display">Premium Web Mimarisi</h3>
-                    <p class="text-slate-400 font-light text-sm mb-4">WordPress veri tabanı ile ölçeklenebilir, mobil uyumlu ve kurum kimliğinizi yansıtan modern arayüz tasarımı.</p>
-                    <ul class="space-y-2 text-slate-300 text-sm">
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary text-xs"></i> Hızlı ve Güvenli Altyapı</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary text-xs"></i> Yönetilebilir Panel</li>
-                    </ul>
-                </div>
-
-                <!-- SEO & GEO -->
-                <div class="glass-premium p-8 group">
-                    <div class="w-12 h-12 rounded-xl bg-brand-secondary/10 border border-brand-secondary/20 flex items-center justify-center text-xl text-brand-secondary mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3 font-display">SEO, GEO & AI</h3>
-                    <p class="text-slate-400 font-light text-sm mb-4">Yeni nesil arama motoru optimizasyonu. Yapay zeka aramaları ve bölgesel (GEO) aramalarda üst sıralarda yer alma.</p>
-                    <ul class="space-y-2 text-slate-300 text-sm">
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-secondary text-xs"></i> Bölgesel Anahtar Kelimeler</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-secondary text-xs"></i> AI Destekli Kod Yapısı</li>
-                    </ul>
-                </div>
-
-                <!-- İçerik Üretimi (Anahtar Teslim) -->
-                <div class="glass-premium p-8 group md:col-span-2 lg:col-span-1 border-brand-primary/30">
-                    <div class="w-12 h-12 rounded-xl bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-xl text-brand-primary mb-6 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(251,191,36,0.3)]">
-                        <i class="fas fa-pen-nib"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3 font-display">Sıfır İş Yükü (İçerik)</h3>
-                    <p class="text-slate-400 font-light text-sm mb-4">Siz işinize odaklanın; hakkımızda, hizmetler ve tüm metin/datalar uzman editörlerimizce üretilip onaya sunulur.</p>
-                    <ul class="space-y-2 text-slate-300 text-sm">
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary text-xs"></i> Sektörel Dil Hakimiyeti</li>
-                        <li class="flex items-center gap-2"><i class="fas fa-check text-brand-primary text-xs"></i> Veri Girişi & Onay Süreci</li>
-                    </ul>
-                </div>
-
-                <!-- Kurumsal İletişim -->
-                <div class="glass-premium p-8 group">
-                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-xl text-purple-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-envelope-open-text"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3 font-display">Kurumsal İletişim Seti</h3>
-                    <p class="text-slate-400 font-light text-sm mb-4">İtibarınızı destekleyecek profesyonel HTML kurumsal e-posta imzaları ve iletişim altyapısı kurgusu.</p>
-                </div>
-
-                <!-- LinkedIn & Haritalar -->
-                <div class="glass-premium p-8 group md:col-span-2">
-                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-xl text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-map-marked-alt"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-white mb-3 font-display">Dış Kaynak Optimizasyonları</h3>
-                    <div class="grid sm:grid-cols-2 gap-4 mt-4">
-                        <div class="bg-white/5 rounded-lg p-4">
-                            <div class="text-brand-primary font-semibold mb-1"><i class="fab fa-linkedin text-blue-400 mr-2"></i> LinkedIn</div>
-                            <div class="text-xs text-slate-400">Kurumsal profilin oluşturulması, kapak tasarımı ve profesyonel ağ optimizasyonu.</div>
-                        </div>
-                        <div class="bg-white/5 rounded-lg p-4">
-                            <div class="text-brand-primary font-semibold mb-1"><i class="fab fa-google text-red-400 mr-2"></i> Google Haritalar</div>
-                            <div class="text-xs text-slate-400">My Business kaydı, lokasyon optimizasyonu (GEO) ve dijital vitrin kurulumu.</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Neden Biz? -->
-        <section id="neden-biz" class="pt-10 reveal">
-            <div class="glass-premium p-10 md:p-16 relative overflow-hidden">
-                <!-- Decorative Elements -->
-                <div class="absolute top-0 right-0 w-64 h-64 bg-brand-primary/5 rounded-full blur-[80px] -z-10 pointer-events-none"></div>
-                
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Neden Bizimle <br>Çalışmalısınız?</h2>
-                        <p class="text-slate-400 font-light mb-8 text-lg">Mali müşavirlik sektörü, sıradan tasarımları değil; güveni, yasal etiği ve kurumsallığı yansıtan özel bir dili hak eder.</p>
-                        
-                        <div class="space-y-6">
-                            <div class="flex gap-4">
-                                <div class="w-10 h-10 shrink-0 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary mt-1"><i class="fas fa-hourglass-half"></i></div>
-                                <div>
-                                    <h4 class="text-white font-bold text-lg">Zamanınız Size Kalır</h4>
-                                    <p class="text-slate-400 text-sm mt-1">Sizden sayfa sayfa metin istemiyoruz. Firmanızın ana hatlarını dinliyor, tüm içeriği biz yazıp, verileri biz girip sadece onayınıza sunuyoruz.</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-4">
-                                <div class="w-10 h-10 shrink-0 rounded-full bg-brand-secondary/10 flex items-center justify-center text-brand-secondary mt-1"><i class="fas fa-bullseye"></i></div>
-                                <div>
-                                    <h4 class="text-white font-bold text-lg">Teknolojik Üstünlük</h4>
-                                    <p class="text-slate-400 text-sm mt-1">Standart bir web sitesi değil; yapay zekanın anlayabileceği semantik kod yapısı ve bölgesel müşteri çekmeye odaklı (GEO) altyapı sunuyoruz.</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-4">
-                                <div class="w-10 h-10 shrink-0 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-400 mt-1"><i class="fas fa-layer-group"></i></div>
-                                <div>
-                                    <h4 class="text-white font-bold text-lg">Bütünsel Yaklaşım</h4>
-                                    <p class="text-slate-400 text-sm mt-1">Sadece siteyi kurup bırakmıyoruz. Google Haritalar, LinkedIn vitrini ve kurumsal mail imzanıza kadar dijital varlığınızı tam bir paket olarak teslim ediyoruz.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Visual representation -->
-                    <div class="relative h-full min-h-[300px] rounded-2xl bg-slate-900/50 border border-slate-700/50 flex items-center justify-center p-8 overflow-hidden">
-                        <div class="absolute inset-0 bg-grid-finance opacity-50"></div>
-                        <div class="relative z-10 w-full max-w-sm space-y-4">
-                            <!-- Mock UI Elements -->
-                            <div class="h-12 bg-slate-800/80 rounded-lg border border-slate-600/50 flex items-center px-4 gap-3 animate-pulse">
-                                <div class="w-6 h-6 rounded-full bg-brand-primary/50"></div>
-                                <div class="h-2 w-24 bg-slate-600 rounded"></div>
-                            </div>
-                            <div class="h-24 bg-slate-800/80 rounded-lg border border-slate-600/50 p-4">
-                                <div class="h-2 w-1/3 bg-brand-secondary/50 rounded mb-3"></div>
-                                <div class="h-2 w-full bg-slate-700 rounded mb-2"></div>
-                                <div class="h-2 w-4/5 bg-slate-700 rounded"></div>
-                            </div>
-                            <div class="flex gap-4">
-                                <div class="h-20 w-1/2 bg-slate-800/80 rounded-lg border border-slate-600/50 flex items-center justify-center text-blue-400/50 text-2xl"><i class="fab fa-linkedin"></i></div>
-                                <div class="h-20 w-1/2 bg-slate-800/80 rounded-lg border border-slate-600/50 flex items-center justify-center text-red-400/50 text-2xl"><i class="fas fa-map-marker-alt"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Çalışma Takvimi (30 Gün) -->
-        <section id="takvim" class="pt-10 reveal">
-            <div class="text-center space-y-4 mb-16">
-                <h2 class="text-4xl md:text-5xl font-display font-bold text-white text-glow-gold">Çalışma Takvimi</h2>
-                <p class="text-slate-400 max-w-2xl mx-auto text-lg font-light">30 günlük net teslimat süreci ile projenin adım adım yol haritası.</p>
-            </div>
-
-            <div class="relative max-w-4xl mx-auto mt-12">
-                <!-- Center Line -->
-                <div class="absolute left-[28px] md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-brand-primary via-brand-secondary to-transparent"></div>
-
-                <div class="space-y-10">
-                    <!-- Hafta 1 -->
-                    <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between group">
-                        <div class="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-bg border-2 border-brand-primary group-hover:bg-brand-primary group-hover:shadow-[0_0_15px_rgba(251,191,36,0.8)] transition-all z-10"></div>
-                        <div class="ml-16 md:ml-0 md:w-[45%] md:text-right md:pr-12">
-                            <h4 class="text-2xl font-bold text-white">1. Hafta: Strateji & İçerik</h4>
-                        </div>
-                        <div class="ml-16 md:ml-0 md:w-[45%] md:pl-12 mt-2 md:mt-0">
-                            <div class="glass-premium p-6 border-l-2 md:border-l-0 md:border-r-2 border-brand-primary/50">
-                                <ul class="text-sm text-slate-400 font-light space-y-2">
-                                    <li><i class="fas fa-check text-brand-primary mr-2"></i> Firma yapısının analizi ve SEO stratejisi</li>
-                                    <li><i class="fas fa-check text-brand-primary mr-2"></i> Tüm site metinlerinin tarafımızca yazılması</li>
-                                    <li><i class="fas fa-check text-brand-primary mr-2"></i> İçeriklerin onaya sunulması</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hafta 2 -->
-                    <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between group md:flex-row-reverse">
-                        <div class="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-bg border-2 border-brand-secondary group-hover:bg-brand-secondary group-hover:shadow-[0_0_15px_rgba(45,212,191,0.8)] transition-all z-10"></div>
-                        <div class="ml-16 md:ml-0 md:w-[45%] md:text-left md:pl-12">
-                            <h4 class="text-2xl font-bold text-white">2. Hafta: Kurulum & Tasarım</h4>
-                        </div>
-                        <div class="ml-16 md:ml-0 md:w-[45%] md:pr-12 mt-2 md:mt-0 md:text-right">
-                            <div class="glass-premium p-6 border-l-2 md:border-l-0 md:border-r-2 border-brand-secondary/50">
-                                <ul class="text-sm text-slate-400 font-light space-y-2">
-                                    <li>WordPress altyapı ve veri tabanı kurulumu <i class="fas fa-check text-brand-secondary ml-2 hidden md:inline"></i></li>
-                                    <li>Kurumsal arayüz (UI/UX) tasarımı inşası <i class="fas fa-check text-brand-secondary ml-2 hidden md:inline"></i></li>
-                                    <li>Onaylanan içeriklerin sisteme entegrasyonu <i class="fas fa-check text-brand-secondary ml-2 hidden md:inline"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hafta 3 -->
-                    <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between group">
-                        <div class="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-bg border-2 border-blue-400 group-hover:bg-blue-400 group-hover:shadow-[0_0_15px_rgba(96,165,250,0.8)] transition-all z-10"></div>
-                        <div class="ml-16 md:ml-0 md:w-[45%] md:text-right md:pr-12">
-                            <h4 class="text-2xl font-bold text-white">3. Hafta: Dış Entegrasyonlar</h4>
-                        </div>
-                        <div class="ml-16 md:ml-0 md:w-[45%] md:pl-12 mt-2 md:mt-0">
-                            <div class="glass-premium p-6 border-l-2 md:border-l-0 md:border-r-2 border-blue-400/50">
-                                <ul class="text-sm text-slate-400 font-light space-y-2">
-                                    <li><i class="fas fa-check text-blue-400 mr-2"></i> SEO & GEO (Yerel) teknik kodlamaları</li>
-                                    <li><i class="fas fa-check text-blue-400 mr-2"></i> Google Haritalar & My Business optimizasyonu</li>
-                                    <li><i class="fas fa-check text-blue-400 mr-2"></i> LinkedIn firma profili kurgusu</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hafta 4 -->
-                    <div class="relative flex flex-col md:flex-row items-start md:items-center md:justify-between group md:flex-row-reverse">
-                        <div class="absolute left-[28px] md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-bg border-2 border-emerald-400 group-hover:bg-emerald-400 group-hover:shadow-[0_0_15px_rgba(52,211,153,0.8)] transition-all z-10"></div>
-                        <div class="ml-16 md:ml-0 md:w-[45%] md:text-left md:pl-12">
-                            <h4 class="text-2xl font-bold text-white">4. Hafta: Test & Teslimat</h4>
-                        </div>
-                        <div class="ml-16 md:ml-0 md:w-[45%] md:pr-12 mt-2 md:mt-0 md:text-right">
-                            <div class="glass-premium p-6 border-l-2 md:border-l-0 md:border-r-2 border-emerald-400/50 shadow-[0_0_20px_rgba(52,211,153,0.1)]">
-                                <ul class="text-sm text-slate-400 font-light space-y-2">
-                                    <li>Mobil/Masaüstü hız ve güvenlik testleri <i class="fas fa-check text-emerald-400 ml-2 hidden md:inline"></i></li>
-                                    <li>Kurumsal mail imzalarının teslimi <i class="fas fa-check text-emerald-400 ml-2 hidden md:inline"></i></li>
-                                    <li><strong class="text-white">Projenin Yayına Alınması (30. Gün)</strong> <i class="fas fa-rocket text-emerald-400 ml-2 hidden md:inline"></i></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Fiyatlandırma / Yatırım -->
-        <section id="yatirim" class="pt-20 reveal">
-            <div class="max-w-4xl mx-auto">
-                <div class="glass-premium !border-brand-primary/40 p-10 md:p-16 text-center relative overflow-hidden">
-                    <div class="absolute inset-0 bg-finance-gradient opacity-10"></div>
-                    
-                    <div class="relative z-10">
-                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-primary/10 text-brand-primary text-sm font-semibold mb-6 border border-brand-primary/20">
-                            <i class="fas fa-gem"></i> Anahtar Teslim Proje
-                        </div>
-                        
-                        <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-6">Toplam Yatırım Bedeli</h2>
-                        <p class="text-slate-300 font-light max-w-xl mx-auto mb-10 text-lg">
-                            İçerik üretimi, WordPress web sitesi, SEO/GEO/AI entegrasyonları, LinkedIn, Haritalar ve mail imzalarını kapsayan tek seferlik proje bedeli.
-                        </p>
-                        
-                        <div class="flex flex-col items-center justify-center mb-10">
-                            <div class="text-6xl md:text-7xl font-bold text-gradient-gold tracking-tight mb-2">
-                                35.000 <span class="text-2xl text-slate-400 font-medium">TL</span>
-                            </div>
-                            <div class="text-sm text-slate-500">+ KDV | Teslimat Süresi: 30 Gün</div>
-                        </div>
-
-                        <a href="https://wa.me/905079448462" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white text-slate-900 font-bold text-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:scale-105 transition-all duration-300">
-                            <i class="fab fa-whatsapp text-green-500 text-2xl"></i> 
-                            Projeyi Başlat
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
+    <!-- LinkedIn Kapak & Dijital -->
+    <section id="digital" class="py-24 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+             <h3 class="text-3xl font-display font-bold mb-12 text-center">LinkedIn Kapak Tasarımı</h3>
+             <div class="w-full aspect-[4/1] bg-brand-black rounded-[2rem] relative overflow-hidden flex items-center px-12 mb-10 shadow-2xl border-8 border-gray-100">
+                  <div class="text-left relative z-10">
+                       <div class="text-brand-green font-mono text-sm tracking-[0.3em] font-bold mb-4 uppercase">OnScala Technologies</div>
+                       <div class="text-white text-3xl md:text-6xl font-display font-bold tracking-tighter leading-none">PRECISION IN<br>PHYSICAL REALITY.</div>
+                  </div>
+                  <div class="absolute right-[-100px] top-[-100px] opacity-10">
+                       <svg width="600" height="600" viewBox="0 0 100 100" fill="white">
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z"/>
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z"/>
+                           <path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z"/>
+                       </svg>
+                  </div>
+             </div>
+             <div class="flex justify-center">
+                  <button onclick="triggerDownload('OnScala_LinkedIn_Banner.png', 'png_banner')" class="px-10 py-5 bg-brand-black text-white rounded-full font-bold text-sm hover:bg-brand-green hover:text-black transition-all shadow-xl">LINKEDIN BANNER İNDİR (HD PNG)</button>
+             </div>
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="mt-20 border-t border-slate-800 bg-brand-bg relative py-12 text-center">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center text-brand-bg font-bold text-xl mx-auto mb-6">MM</div>
-            <p class="text-slate-500 font-light text-sm mb-2">Mali Müşavirlik firmaları için özel olarak hazırlanmış uçtan uca dijital dönüşüm teklifidir.</p>
-            <p class="text-slate-600 text-xs">&copy; 2026. Tüm hakları saklıdır.</p>
-        </div>
+    <footer class="bg-brand-black text-gray-600 py-12 text-center text-[10px] font-mono tracking-widest uppercase border-t border-white/5">
+        OnScala.® Tech-Core Identity Guidelines. scale to 1:1.
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const reveals = document.querySelectorAll('.reveal');
-            
-            const revealOnScroll = () => {
-                const windowHeight = window.innerHeight;
-                const elementVisible = 100;
-                
-                reveals.forEach(reveal => {
-                    const elementTop = reveal.getBoundingClientRect().top;
-                    if (elementTop < windowHeight - elementVisible) {
-                        reveal.classList.add('active');
-                    }
-                });
-            };
+    <!-- Toast System -->
+    <div id="toast" class="fixed bottom-8 right-8 transform translate-y-32 opacity-0 transition-all duration-500 z-[100] bg-brand-black text-white px-8 py-4 rounded-2xl shadow-2xl border border-brand-green/20 flex items-center gap-4 pointer-events-none">
+        <div class="w-2 h-2 bg-brand-green rounded-full animate-pulse"></div>
+        <div id="toast-msg" class="font-mono text-xs">Dosya hazırlanıyor...</div>
+    </div>
 
-            window.addEventListener('scroll', revealOnScroll);
-            revealOnScroll(); // Trigger once on load
-        });
+    <!-- Script Motoru (String Concatenation ile Güvenli Hale Getirildi ve Kısaltmalar Kaldırıldı) -->
+    <script>
+        function triggerDownload(fileName, format) {
+            var toast = document.getElementById('toast');
+            var toastMsg = document.getElementById('toast-msg');
+            toastMsg.innerText = fileName + " indiriliyor...";
+            toast.classList.remove('translate-y-32', 'opacity-0');
+
+            var svgNS = 'xmlns="http://www.w3.org/2000/svg"';
+            
+            // FILL-RULE EVENODD EKLENMİŞ VEKTÖR (Dolu Küp Hatalarını Engeller)
+            var pathO = '<path fill-rule="evenodd" clip-rule="evenodd" d="M 50 2 L 88 24 L 50 46 L 12 24 Z M 50 14 L 33 24 L 50 34 L 67 24 Z" ';
+            var pathN = '<path fill-rule="evenodd" clip-rule="evenodd" d="M 10 29 L 10 72 L 20 78 L 20 50 L 38 77 L 38 88 L 48 94 L 48 51 L 38 45 L 38 67 L 20 40 L 20 35 Z" ';
+            var pathS = '<path fill-rule="evenodd" clip-rule="evenodd" d="M 52 51 L 90 29 L 90 39 L 66 53 L 66 59 L 90 45 L 90 72 L 52 94 L 52 84 L 76 70 L 76 64 L 52 78 Z" ';
+
+            var content = "";
+            var mimeType = "image/svg+xml";
+
+            // Dinamik Veriler
+            var nameStr = "ÇAĞRI ASLUM";
+            var titleStr = "KURUCU ORTAK / CO-FOUNDER";
+            var emailStr = "cagri.aslum@onscala.com";
+            var phoneStr = "+90 506 201 99 95";
+            var isCorporate = fileName.includes('Corporate') || fileName.includes('Kurumsal');
+
+            if (fileName.includes('Akif')) {
+                nameStr = "AKİF BİRDAL";
+                emailStr = "akif.birdal@onscala.com";
+                phoneStr = "+90 544 936 00 01";
+            } else if (fileName.includes('Ahmet')) {
+                nameStr = "AHMET BİRDAL";
+                emailStr = "ahmet.birdal@onscala.com";
+                phoneStr = "+90 531 313 10 75";
+            } else if (isCorporate) {
+                nameStr = "ONSCALA";
+                titleStr = "TASARIM VE MODELLEME TEKNOLOJİLERİ A.Ş.";
+            }
+
+            var firstName = nameStr.split(' ')[0];
+            var lastName = nameStr.split(' ').slice(1).join(' ');
+
+            // SVG Construction (GÜVENLİ VE OKUNAKLI FONT: 'Helvetica Neue', Helvetica, Arial, sans-serif)
+            if (format.includes('card')) {
+                var isDark = fileName.includes('Koyu') || format === 'png_card';
+                var isLight = fileName.includes('Acik') || format === 'png_card_light';
+                var isTitanium = fileName.includes('Titanyum') || format === 'png_card_titanium';
+                
+                var bgFront = isDark ? "#111111" : (isLight ? "#F8FAFC" : "#2A2F35");
+                var bgBack = isDark ? "#1a1a1a" : (isLight ? "#FFFFFF" : "#1E2328");
+                var textPrimary = isDark ? "#FFFFFF" : (isLight ? "#111111" : "#F8FAFC");
+                var textSecondary = isDark ? "#9CA3AF" : (isLight ? "#6B7280" : "#94A3B8");
+                var textAccent = isLight ? "#6B7280" : (isDark ? "#00F060" : "#94A3B8");
+                
+                var colorO = isDark ? "#64748B" : (isLight ? "#64748B" : "#94A3B8");
+                var colorN = isDark ? "#FFFFFF" : (isLight ? "#111111" : "#CBD5E1");
+                var colorS = isDark ? "#00F060" : (isLight ? "#00F060" : "#64748B");
+
+                content = '<svg ' + svgNS + ' viewBox="0 0 1050 1400" width="1050" height="1400">' +
+                    '<rect width="1050" height="1400" fill="#E5E7EB"/>' +
+                    '<!-- FRONT -->' +
+                    '<g transform="translate(100, 100)">' +
+                        '<rect width="850" height="550" rx="20" fill="' + bgFront + '"/>' +
+                        '<g transform="translate(260, 230)">' +
+                            '<g transform="scale(1.4)">' + pathO + 'fill="' + colorO + '"/>' + pathN + 'fill="' + colorN + '"/>' + pathS + 'fill="' + colorS + '"/></g>' +
+                            '<text x="110" y="70" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="800" font-size="52" fill="' + textPrimary + '" letter-spacing="-1">OnScala.</text>' +
+                        '</g>' +
+                    '</g>' +
+                    '<!-- BACK -->' +
+                    '<g transform="translate(100, 750)">' +
+                        '<rect width="850" height="550" rx="20" fill="' + bgBack + '"/>' +
+                        '<rect x="730" y="0" width="80" height="15" fill="' + (isDark?'#00F060':(isLight?'#111':'#94A3B8')) + '" rx="2"/>' +
+                        
+                        '<text x="80" y="160" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="bold" font-size="46" fill="' + textPrimary + '" letter-spacing="2">' + nameStr.toUpperCase() + '</text>' +
+                        '<text x="80" y="210" font-family="monospace" font-weight="bold" font-size="18" fill="' + textAccent + '" letter-spacing="4">' + titleStr.toUpperCase() + '</text>' +
+                        
+                        '<g transform="translate(80, 320)">' +
+                            '<text y="0" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="24" fill="' + textSecondary + '">' + phoneStr + '</text>' +
+                            '<text y="55" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="24" fill="' + textSecondary + '">' + emailStr + '</text>' +
+                            '<text y="110" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="24" fill="' + textSecondary + '">info@onscala.com</text>' +
+                            '<text y="165" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="24" fill="' + textSecondary + '">onscala.com</text>' +
+                        '</g>' +
+                        
+                        '<g transform="translate(600, 280)">' +
+                            '<rect width="170" height="170" rx="12" fill="#FFFFFF"/>' +
+                            '<path d="M20 20 h40 v40 h-40 z M110 20 h40 v40 h-40 z M20 110 h40 v40 h-40 z" fill="#111111"/>' +
+                            '<path d="M30 30 h20 v20 h-20 z M120 30 h20 v20 h-20 z M30 120 h20 v20 h-20 z" fill="#FFFFFF"/>' +
+                            '<path d="M35 35 h10 v10 h-10 z M125 35 h10 v10 h-10 z M35 125 h10 v10 h-10 z" fill="#111111"/>' +
+                            '<rect x="75" y="75" width="20" height="20" fill="#111111"/>' +
+                            '<rect x="110" y="110" width="20" height="20" fill="#111111"/>' +
+                            '<rect x="135" y="135" width="15" height="15" fill="#111111"/>' +
+                            '<rect x="75" y="135" width="20" height="15" fill="#111111"/>' +
+                        '</g>' +
+                    '</g></svg>';
+            } 
+            else if (format.includes('yaka')) {
+                var isYakaDark = fileName.includes('Koyu') || format === 'png_yaka';
+                var bgFrontY = isYakaDark ? '#111111' : '#F8FAFC';
+                var bgBackY = isYakaDark ? '#151515' : '#FFFFFF';
+                var textPrimY = isYakaDark ? '#FFFFFF' : '#111111';
+                var logoNY = isYakaDark ? '#FFFFFF' : '#111111';
+
+                content = '<svg ' + svgNS + ' viewBox="0 0 1200 1100" width="1200" height="1100">' +
+                    '<rect width="1200" height="1100" fill="#E5E7EB"/>' +
+                    '<!-- FRONT -->' +
+                    '<g transform="translate(100, 100)">' +
+                        '<rect width="450" height="750" rx="35" fill="' + bgFrontY + '"/>' +
+                        '<rect x="175" y="30" width="100" height="15" rx="7" fill="' + (isYakaDark?'#222':'#E5E7EB') + '"/>' +
+                        
+                        '<g transform="translate(50, 100)">' +
+                            '<g transform="scale(1.2)">' + pathO + 'fill="#64748B"/>' + pathN + 'fill="' + logoNY + '"/>' + pathS + 'fill="#00F060"/></g>' +
+                            '<text x="0" y="140" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="bold" font-size="28" fill="' + textPrimY + '" letter-spacing="4">ONSCALA.</text>' +
+                        '</g>' +
+                        
+                        '<text x="50" y="360" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="bold" font-size="65" fill="' + textPrimY + '">' + firstName.toLowerCase() + '</text>' +
+                        '<text x="50" y="430" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="bold" font-size="65" fill="' + textPrimY + '">' + lastName.toLowerCase() + '</text>' +
+                        '<text x="50" y="490" font-family="monospace" font-weight="bold" font-size="16" fill="#00F060" letter-spacing="2">' + titleStr + '</text>' +
+                        
+                        '<path d="M 0 600 Q 225 500 450 600" stroke="' + textPrimY + '" stroke-width="3" fill="none" opacity="0.1"/>' +
+                        
+                        '<g transform="translate(320, 580)">' +
+                            '<rect width="90" height="120" rx="15" fill="#111111"/>' +
+                            '<text x="45" y="28" font-family="monospace" font-size="12" font-weight="bold" fill="#FFF" letter-spacing="2" text-anchor="middle">SCAN</text>' +
+                            '<rect x="15" y="45" width="60" height="60" rx="6" fill="#FFF"/>' +
+                            '<path d="M22 52 h20 v20 h-20 z M58 52 h20 v20 h-20 z M22 88 h20 v20 h-20 z" fill="#111111"/>' +
+                        '</g>' +
+                    '</g>' +
+                    
+                    '<!-- BACK -->' +
+                    '<g transform="translate(650, 100)">' +
+                        '<rect width="450" height="750" rx="35" fill="' + bgBackY + '"/>' +
+                        '<rect x="175" y="30" width="100" height="15" rx="7" fill="' + (isYakaDark?'#222':'#E5E7EB') + '"/>' +
+                        
+                        '<g transform="translate(150, 250) scale(1.8)">' + pathO + 'fill="#64748B"/>' + pathN + 'fill="' + logoNY + '"/>' + pathS + 'fill="#00F060"/></g>' +
+                        '<text x="225" y="480" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="bold" font-size="44" fill="' + textPrimY + '" text-anchor="middle" letter-spacing="2">OnScala.</text>' +
+                        '<text x="225" y="520" font-family="monospace" font-weight="bold" font-size="16" fill="#00F060" text-anchor="middle" letter-spacing="4">SCALE TO 1:1</text>' +
+                        '<text x="225" y="680" font-family="monospace" font-size="16" fill="#888" text-anchor="middle" letter-spacing="2">www.onscala.com</text>' +
+                    '</g></svg>';
+            } 
+            else if (format.includes('email')) {
+                content = '<svg ' + svgNS + ' viewBox="0 0 800 260" width="800" height="260">' +
+                    '<rect width="800" height="260" fill="#FFF"/>' +
+                    '<g transform="translate(40, 40)">' +
+                        '<g transform="scale(1.2)">' + pathO + 'fill="#64748B"/>' + pathN + 'fill="#111"/>' + pathS + 'fill="#00F060"/></g>' +
+                        '<line x1="140" y1="0" x2="140" y2="180" stroke="#00F060" stroke-width="3"/>' +
+                        '<text x="170" y="40" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="900" font-size="32" fill="#111">' + nameStr + '</text>' +
+                        '<text x="170" y="75" font-family="monospace" font-size="14" fill="#64748B" font-weight="bold">' + titleStr + '</text>' +
+                        (isCorporate ? 
+                        '<text x="170" y="120" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="18" fill="#888">info@onscala.com</text>' +
+                        '<text x="170" y="150" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="18" fill="#888">onscala.com</text>' 
+                        : 
+                        '<text x="170" y="115" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="18" fill="#888">' + phoneStr + '</text>' +
+                        '<text x="170" y="145" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="18" fill="#888">' + emailStr + '</text>' +
+                        '<text x="170" y="175" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-size="18" fill="#888">onscala.com</text>') +
+                    '</g></svg>';
+            } 
+            else if (format.includes('banner')) {
+                content = '<svg ' + svgNS + ' viewBox="0 0 1584 396" width="1584" height="396">' +
+                    '<rect width="1584" height="396" fill="#111"/>' +
+                    '<g transform="translate(1100, -100) scale(12)" opacity="0.15">' + pathO + 'fill="#64748B"/>' + pathN + 'fill="#FFF"/>' + pathS + 'fill="#00F060"/></g>' +
+                    '<text x="100" y="180" font-family="monospace" font-size="24" fill="#00F060" font-weight="bold" letter-spacing="10">ONSCALA TECHNOLOGIES</text>' +
+                    '<text x="100" y="260" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="bold" font-size="70" fill="#FFF">PRECISION IN</text>' +
+                    '<text x="100" y="335" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="bold" font-size="70" fill="#FFF">PHYSICAL REALITY.</text>' +
+                    '</svg>';
+            } 
+            else if (format.includes('print')) {
+                content = "Bu bir ZIP veya Font dosyasi simulasyonudur. Gercek projede sunucudan barindirilir.";
+                mimeType = "text/plain";
+            }
+            else {
+                var isTr = format.includes('transparent');
+                var logoColN = fileName.includes('Acik') ? '#111' : '#FFF';
+                
+                content = '<svg ' + svgNS + ' viewBox="0 0 400 120" width="800" height="240">' +
+                    (isTr ? "" : '<rect width="400" height="120" fill="' + (fileName.includes('Acik') ? '#FFF' : '#111') + '"/>') +
+                    '<g transform="translate(20, 10)">' +
+                        '<g transform="scale(1)">' + pathO + 'fill="#64748B"/>' + pathN + 'fill="' + logoColN + '"/>' + pathS + 'fill="#00F060"/></g>' +
+                        '<text x="100" y="60" font-family="\'Helvetica Neue\', Helvetica, Arial, sans-serif" font-weight="900" font-size="36" fill="' + logoColN + '">OnScala.</text>' +
+                        '<text x="103" y="80" font-family="monospace" font-weight="bold" font-size="10" letter-spacing="3" fill="#00F060">SCALE TO 1:1</text>' +
+                    '</g></svg>';
+            }
+
+            // Download Trigger
+            if (format.includes('png') && !format.includes('print')) {
+                var img = new Image();
+                img.onload = function() {
+                    var canvas = document.createElement('canvas');
+                    var ctx = canvas.getContext('2d');
+                    
+                    var w = 800, h = 800;
+                    if(format.includes('card')) { w = 1050; h = 1400; }
+                    else if(format.includes('yaka')) { w = 1200; h = 1100; }
+                    else if(format.includes('banner')) { w = 1584; h = 396; }
+                    else if(format.includes('email')) { w = 800; h = 260; }
+                    else if(format.includes('transparent')) { w = 400; h = 120; }
+                    
+                    var scaleFactor = format.includes('transparent') ? 4 : 2;
+                    canvas.width = w * scaleFactor; 
+                    canvas.height = h * scaleFactor;
+                    
+                    ctx.scale(scaleFactor, scaleFactor); 
+                    ctx.drawImage(img, 0, 0);
+                    
+                    var link = document.createElement('a'); 
+                    link.download = fileName; 
+                    link.href = canvas.toDataURL('image/png'); 
+                    link.click();
+                    setTimeout(function() { toast.classList.add('translate-y-32', 'opacity-0'); }, 1500);
+                };
+                img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(content)));
+            } else {
+                var blob = new Blob([content], {type: mimeType});
+                var link = document.createElement('a'); 
+                link.href = URL.createObjectURL(blob); 
+                link.download = fileName.includes('print') ? fileName.replace('.png', '.zip') : fileName; 
+                link.click();
+                setTimeout(function() { toast.classList.add('translate-y-32', 'opacity-0'); }, 1500);
+            }
+        }
     </script>
 </body>
 </html>
