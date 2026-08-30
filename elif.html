@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elif Tarman Studio | Master Brand Guidelines 1920x1080</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>Elif Tarman Studio | Master Brand Guidelines 1920x1080 Print Master</title>
     
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- jsPDF & html2canvas for Zero-Shift Multi-Page PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- Google Fonts: Inter & Space Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -21,7 +26,7 @@
                     },
                     colors: {
                         et: {
-                            ink: '#0A0A0A',       // Monolithic Charcoal
+                            ink: '#0A0A0A',       // Monolithic Charcoal / Vantablack
                             paper: '#F7F6F2',     // Raw cotton paper
                             concrete: '#737373',  // Structural gray
                             stone: '#D9D9D9',     // Light stone gray
@@ -33,6 +38,7 @@
                         widest: '.25em',
                         superwide: '.45em',
                         megawide: '.85em',
+                        ultra: '1.2em'
                     }
                 }
             }
@@ -41,12 +47,12 @@
 
     <style>
         * { box-sizing: border-box; }
+        
         html, body {
             background-color: #050505;
             color: #0A0A0A;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
@@ -59,7 +65,7 @@
             background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%220.035%22/%3E%3C/svg%3E');
         }
 
-        /* 1920x1080 Slide Standard */
+        /* 1920x1080 Standard Page Canvas */
         .slide-page {
             width: 1920px;
             height: 1080px;
@@ -70,12 +76,11 @@
             position: relative;
             overflow: hidden;
             background-color: #F7F6F2;
-            page-break-after: always;
-            break-after: page;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 64px 80px;
+            padding: 56px 80px;
+            box-sizing: border-box;
         }
 
         /* Drafting Graphics & Crosshairs */
@@ -84,7 +89,7 @@
         .crosshair::before { top: 9.5px; left: 0; width: 20px; height: 1px; }
         .crosshair::after { top: 0; left: 9.5px; width: 1px; height: 20px; }
         
-        /* 48 Field Grid Matrix Overlay (6x8) */
+        /* 48 Field Grid Matrix Overlay */
         .grid-48-field {
             background-image: 
                 linear-gradient(to right, rgba(255, 10, 10, 0.14) 1px, transparent 1px),
@@ -109,7 +114,7 @@
             white-space: nowrap; user-select: none;
         }
 
-        /* Chiaroscuro Architectural Filter */
+        /* Chiaroscuro Filter */
         .et-photo-effect {
             filter: grayscale(100%) contrast(145%) brightness(92%);
             position: relative;
@@ -122,13 +127,13 @@
 
         .chapter-badge {
             font-family: 'Space Mono', monospace; font-size: 140px; font-weight: 700;
-            line-height: 1; color: rgba(10,10,10,0.035); position: absolute; right: 80px; top: 50px; pointer-events: none;
+            line-height: 1; color: rgba(10,10,10,0.035); position: absolute; right: 80px; top: 40px; pointer-events: none;
         }
         .bg-et-ink .chapter-badge, .bg-\[\#111\] .chapter-badge { color: rgba(247,246,242,0.03); }
 
-        /* Responsive Viewport Scaler Wrapper */
+        /* Viewer & Scale Styles */
         #deck-viewport {
-            width: 100vw;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -141,13 +146,52 @@
             transform-origin: top center;
         }
 
-        /* Print & PDF Export */
+        /* STRICT ZERO-SHIFT PRINT STYLESHEET */
         @media print {
-            body { background-color: #F7F6F2 !important; }
-            #hud-controls, .noise-overlay, #toast { display: none !important; }
-            #deck-viewport { padding: 0 !important; gap: 0 !important; width: 1920px !important; }
-            .slide-frame { box-shadow: none !important; margin: 0 !important; }
-            .slide-page { page-break-after: always !important; break-after: page !important; }
+            @page {
+                size: 1920px 1080px;
+                margin: 0;
+            }
+            html, body {
+                width: 1920px !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: #F7F6F2 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            #hud-controls, .noise-overlay, #toast {
+                display: none !important;
+            }
+            #deck-viewport {
+                padding: 0 !important;
+                margin: 0 !important;
+                gap: 0 !important;
+                width: 1920px !important;
+                display: block !important;
+            }
+            .slide-frame {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                transform: none !important;
+                width: 1920px !important;
+                height: 1080px !important;
+                page-break-before: auto !important;
+                page-break-after: always !important;
+                break-after: page !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+            }
+            .slide-page {
+                width: 1920px !important;
+                height: 1080px !important;
+                margin: 0 !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                overflow: hidden !important;
+            }
         }
     </style>
 </head>
@@ -160,7 +204,7 @@
         <div class="flex items-center gap-3 pr-4 border-r border-white/20">
             <span class="w-2.5 h-2.5 bg-et-crimson rounded-full animate-pulse"></span>
             <span class="font-bold tracking-widest uppercase">ELIF TARMAN STUDIO</span>
-            <span class="text-et-concrete text-[10px]">1920×1080 HD</span>
+            <span class="text-et-concrete text-[10px]">1920×1080 HD MASTER</span>
         </div>
 
         <!-- Jump to Slide Selector -->
@@ -193,9 +237,14 @@
                 <span>Grid [G]</span>
             </button>
 
+            <button onclick="window.print()" class="hover:text-et-crimson transition-colors flex items-center gap-1.5 uppercase text-[10px] tracking-wider">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                <span>Baskı (Ctrl+P)</span>
+            </button>
+
             <button onclick="exportDeckPDF()" id="pdf-btn" class="bg-white text-black hover:bg-et-crimson hover:text-white px-3.5 py-1 rounded-full font-bold transition-colors flex items-center gap-1.5 text-[10px] tracking-wider uppercase">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                <span id="pdf-btn-text">PDF Export</span>
+                <span id="pdf-btn-text">PDF İndir</span>
             </button>
         </div>
     </header>
@@ -214,7 +263,7 @@
                 <div class="absolute bottom-12 right-16 crosshair text-et-concrete"></div>
 
                 <!-- Slide Top Meta -->
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Document: ET-BGB-2026/V3</span>
                     <span>Interior Architecture Master Guidelines</span>
                     <span>1920 × 1080 Widescreen</span>
@@ -222,9 +271,9 @@
 
                 <!-- Center Brand Focal Point -->
                 <div class="z-10 flex flex-col items-center text-center my-auto">
-                    <p class="font-mono text-sm tracking-superwide text-et-concrete uppercase mb-10">Spatial Architectural Standards</p>
+                    <p class="font-mono text-xs tracking-superwide text-et-concrete uppercase mb-8">Spatial Architectural Standards</p>
                     
-                    <div class="w-32 h-32 mb-10 text-et-ink flex justify-center items-center">
+                    <div class="w-28 h-28 mb-8 text-et-ink flex justify-center items-center">
                         <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-currentColor stroke-[2]">
                             <rect x="10" y="10" width="80" height="80" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.35"/>
                             <path d="M30,30 L30,70 L60,70" />
@@ -235,17 +284,17 @@
                         </svg>
                     </div>
                     
-                    <div class="logo-stack text-6xl font-sans font-extralight text-et-ink mb-10">
+                    <div class="logo-stack text-6xl font-sans font-extralight text-et-ink mb-8">
                         <span class="mb-3">E L I F</span>
                         <span>T A R M A N</span>
                     </div>
 
-                    <div class="w-16 h-1 bg-et-crimson mb-8"></div>
-                    <h1 class="font-sans font-black text-2xl tracking-superwide uppercase text-et-ink">Interior Architecture Studio</h1>
+                    <div class="w-16 h-1 bg-et-crimson mb-6"></div>
+                    <h1 class="font-sans font-black text-xl tracking-superwide uppercase text-et-ink">Interior Architecture Studio</h1>
                 </div>
 
                 <!-- Slide Footer Meta -->
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Principal: Elif Tarman</span>
                     <span>Volume 03.0 // 2026 Master Edition</span>
                     <span>Plate 01 / 16</span>
@@ -258,7 +307,7 @@
             <section class="slide-page bg-et-ink text-et-paper">
                 <div class="chapter-badge">00</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-3">
                     <span>System Index & Overview</span>
                     <span>Classification: Architecture Core</span>
                     <span>Plate 02 / 16</span>
@@ -266,50 +315,50 @@
 
                 <div class="z-10 my-auto">
                     <p class="font-mono text-xs tracking-superwide text-et-crimson uppercase mb-2">Architectural Blueprint</p>
-                    <h2 class="font-sans font-black text-6xl uppercase tracking-tighter mb-12">Index Matrix.</h2>
+                    <h2 class="font-sans font-black text-5xl uppercase tracking-tighter mb-10">Index Matrix.</h2>
 
-                    <div class="grid grid-cols-4 gap-12 font-mono text-xs uppercase tracking-widest text-et-concrete">
-                        <div class="space-y-4 border-t-2 border-et-crimson pt-4">
+                    <div class="grid grid-cols-4 gap-10 font-mono text-xs uppercase tracking-widest text-et-concrete">
+                        <div class="space-y-3 border-t-2 border-et-crimson pt-4">
                             <p class="text-white font-bold text-sm">01-04 Foundations</p>
-                            <ul class="space-y-3 leading-relaxed">
-                                <li class="flex justify-between hover:text-white"><span>01. Manifesto</span><span class="text-et-crimson">p.03</span></li>
-                                <li class="flex justify-between hover:text-white"><span>02. Core Pillars</span><span class="text-et-crimson">p.04</span></li>
-                                <li class="flex justify-between hover:text-white"><span>03. Grid Matrix</span><span class="text-et-crimson">p.05</span></li>
-                                <li class="flex justify-between hover:text-white"><span>04. Logo Geometry</span><span class="text-et-crimson">p.06</span></li>
+                            <ul class="space-y-2.5 leading-relaxed">
+                                <li class="flex justify-between"><span>01. Manifesto</span><span class="text-et-crimson">p.03</span></li>
+                                <li class="flex justify-between"><span>02. Core Pillars</span><span class="text-et-crimson">p.04</span></li>
+                                <li class="flex justify-between"><span>03. Grid Matrix</span><span class="text-et-crimson">p.05</span></li>
+                                <li class="flex justify-between"><span>04. Logo Geometry</span><span class="text-et-crimson">p.06</span></li>
                             </ul>
                         </div>
 
-                        <div class="space-y-4 border-t-2 border-white/40 pt-4">
+                        <div class="space-y-3 border-t-2 border-white/40 pt-4">
                             <p class="text-white font-bold text-sm">05-08 Visual Specs</p>
-                            <ul class="space-y-3 leading-relaxed">
-                                <li class="flex justify-between hover:text-white"><span>05. Safe Zone</span><span class="text-et-crimson">p.07</span></li>
-                                <li class="flex justify-between hover:text-white"><span>06. Palette Specs</span><span class="text-et-crimson">p.08</span></li>
-                                <li class="flex justify-between hover:text-white"><span>07. Typography</span><span class="text-et-crimson">p.09</span></li>
-                                <li class="flex justify-between hover:text-white"><span>08. Chiaroscuro</span><span class="text-et-crimson">p.10</span></li>
+                            <ul class="space-y-2.5 leading-relaxed">
+                                <li class="flex justify-between"><span>05. Safe Zone</span><span class="text-et-crimson">p.07</span></li>
+                                <li class="flex justify-between"><span>06. Palette Specs</span><span class="text-et-crimson">p.08</span></li>
+                                <li class="flex justify-between"><span>07. Typography</span><span class="text-et-crimson">p.09</span></li>
+                                <li class="flex justify-between"><span>08. Chiaroscuro</span><span class="text-et-crimson">p.10</span></li>
                             </ul>
                         </div>
 
-                        <div class="space-y-4 border-t-2 border-white/40 pt-4">
+                        <div class="space-y-3 border-t-2 border-white/40 pt-4">
                             <p class="text-white font-bold text-sm">09-12 Collateral</p>
-                            <ul class="space-y-3 leading-relaxed">
-                                <li class="flex justify-between hover:text-white"><span>09. Stationery</span><span class="text-et-crimson">p.11</span></li>
-                                <li class="flex justify-between hover:text-white"><span>10. Social Grid</span><span class="text-et-crimson">p.12</span></li>
-                                <li class="flex justify-between hover:text-white"><span>11. Digital UI</span><span class="text-et-crimson">p.13</span></li>
-                                <li class="flex justify-between hover:text-white"><span>12. Environmental</span><span class="text-et-crimson">p.14</span></li>
+                            <ul class="space-y-2.5 leading-relaxed">
+                                <li class="flex justify-between"><span>09. Stationery</span><span class="text-et-crimson">p.11</span></li>
+                                <li class="flex justify-between"><span>10. Social Grid</span><span class="text-et-crimson">p.12</span></li>
+                                <li class="flex justify-between"><span>11. Digital UI</span><span class="text-et-crimson">p.13</span></li>
+                                <li class="flex justify-between"><span>12. Environmental</span><span class="text-et-crimson">p.14</span></li>
                             </ul>
                         </div>
 
-                        <div class="space-y-4 border-t-2 border-white/40 pt-4">
+                        <div class="space-y-3 border-t-2 border-white/40 pt-4">
                             <p class="text-white font-bold text-sm">13-16 Objects</p>
-                            <ul class="space-y-3 leading-relaxed">
-                                <li class="flex justify-between hover:text-white"><span>13. Artifacts & ID</span><span class="text-et-crimson">p.15</span></li>
-                                <li class="flex justify-between hover:text-white"><span>14. Sign-off</span><span class="text-et-crimson">p.16</span></li>
+                            <ul class="space-y-2.5 leading-relaxed">
+                                <li class="flex justify-between"><span>13. Artifacts & ID</span><span class="text-et-crimson">p.15</span></li>
+                                <li class="flex justify-between"><span>14. Sign-off</span><span class="text-et-crimson">p.16</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-3">
                     <span>Elif Tarman Interior Architecture</span>
                     <span>Index Reference Matrix</span>
                     <span>16 Modules Active</span>
@@ -322,7 +371,7 @@
             <section class="slide-page bg-et-paper text-et-ink">
                 <div class="chapter-badge">01</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 01 // Philosophy</span>
                     <span>Studio Manifesto</span>
                     <span>Plate 03 / 16</span>
@@ -338,14 +387,14 @@
                         <div class="w-20 h-1 bg-et-crimson"></div>
                     </div>
 
-                    <div class="col-span-7 space-y-6 font-sans text-base text-neutral-700 leading-relaxed font-light">
+                    <div class="col-span-7 space-y-5 font-sans text-base text-neutral-700 leading-relaxed font-light">
                         <p class="text-xl text-et-ink font-normal leading-relaxed">
                             Elif Tarman Studio is an interior architecture practice defined by monolithic discipline, brutal restraint, and the timeless manipulation of volume.
                         </p>
                         <p>
                             Our visual brand identity is an extension of our architectural projects. It does not entertain decorative vanity; instead, it establishes structural harmony between solid surfaces and vast negative space.
                         </p>
-                        <div class="bg-white p-6 border-l-4 border-et-ink shadow-sm">
+                        <div class="bg-white p-6 border-l-4 border-et-ink shadow-sm mt-4">
                             <p class="font-mono text-xs font-bold uppercase tracking-widest text-et-concrete mb-2">Core Proposition</p>
                             <p class="text-sm text-et-ink font-medium">
                                 "Strip away the superfluous until only spatial truth, architectural gravity, and emotional permanence remain."
@@ -354,7 +403,7 @@
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Manifesto & Spatial Ethos</span>
                     <span>Standard Approved</span>
@@ -367,7 +416,7 @@
             <section class="slide-page bg-et-ink text-white">
                 <div class="chapter-badge">02</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-3">
                     <span>Section 02 // Values</span>
                     <span>Foundational Pillars</span>
                     <span>Plate 04 / 16</span>
@@ -375,44 +424,44 @@
 
                 <div class="z-10 my-auto">
                     <p class="font-mono text-xs tracking-superwide text-et-crimson uppercase mb-2">Core Principles</p>
-                    <h2 class="font-sans font-black text-5xl uppercase tracking-tighter mb-10">Architectural Ethics.</h2>
+                    <h2 class="font-sans font-black text-5xl uppercase tracking-tighter mb-8">Architectural Ethics.</h2>
 
-                    <div class="grid grid-cols-2 gap-8">
-                        <div class="border-l-4 border-et-crimson bg-[#141414] p-8 border border-[#262626]">
-                            <span class="font-mono text-xs text-et-crimson uppercase tracking-widest mb-2 block">Pillar 01</span>
-                            <h3 class="font-sans font-bold text-xl uppercase tracking-widest mb-3 text-white">The Inherent Worth of Void</h3>
-                            <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="border-l-4 border-et-crimson bg-[#141414] p-7 border border-[#262626]">
+                            <span class="font-mono text-xs text-et-crimson uppercase tracking-widest mb-1 block">Pillar 01</span>
+                            <h3 class="font-sans font-bold text-lg uppercase tracking-widest mb-2 text-white">The Inherent Worth of Void</h3>
+                            <p class="font-sans text-xs text-et-concrete leading-relaxed font-light">
                                 Emptiness is not absence; it is active presence. True spatial luxury is discovered in silence, strict reduction, and the deliberate exclusion of ornamental noise.
                             </p>
                         </div>
 
-                        <div class="border-l-4 border-et-crimson bg-[#141414] p-8 border border-[#262626]">
-                            <span class="font-mono text-xs text-et-crimson uppercase tracking-widest mb-2 block">Pillar 02</span>
-                            <h3 class="font-sans font-bold text-xl uppercase tracking-widest mb-3 text-white">Material Authenticity</h3>
-                            <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                        <div class="border-l-4 border-et-crimson bg-[#141414] p-7 border border-[#262626]">
+                            <span class="font-mono text-xs text-et-crimson uppercase tracking-widest mb-1 block">Pillar 02</span>
+                            <h3 class="font-sans font-bold text-lg uppercase tracking-widest mb-2 text-white">Material Authenticity</h3>
+                            <p class="font-sans text-xs text-et-concrete leading-relaxed font-light">
                                 Materials must remain raw and honest. Board-formed concrete must feel cold; porous travertine must breathe; unlacquered steel must patinate gracefully.
                             </p>
                         </div>
 
-                        <div class="border-l-4 border-et-crimson bg-[#141414] p-8 border border-[#262626]">
-                            <span class="font-mono text-xs text-et-crimson uppercase tracking-widest mb-2 block">Pillar 03</span>
-                            <h3 class="font-sans font-bold text-xl uppercase tracking-widest mb-3 text-white">Decadal Permanence</h3>
-                            <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                        <div class="border-l-4 border-et-crimson bg-[#141414] p-7 border border-[#262626]">
+                            <span class="font-mono text-xs text-et-crimson uppercase tracking-widest mb-1 block">Pillar 03</span>
+                            <h3 class="font-sans font-bold text-lg uppercase tracking-widest mb-2 text-white">Decadal Permanence</h3>
+                            <p class="font-sans text-xs text-et-concrete leading-relaxed font-light">
                                 We oppose ephemeral, disposable trends. We engineer volumes and graphic artifacts built to age with dignity over decades of sunlight exposure.
                             </p>
                         </div>
 
-                        <div class="border-l-4 border-et-crimson bg-[#141414] p-8 border border-[#262626]">
-                            <span class="font-mono text-xs text-et-crimson uppercase tracking-widest mb-2 block">Pillar 04</span>
-                            <h3 class="font-sans font-bold text-xl uppercase tracking-widest mb-3 text-white">Architectural Chiaroscuro</h3>
-                            <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                        <div class="border-l-4 border-et-crimson bg-[#141414] p-7 border border-[#262626]">
+                            <span class="font-mono text-xs text-et-crimson uppercase tracking-widest mb-1 block">Pillar 04</span>
+                            <h3 class="font-sans font-bold text-lg uppercase tracking-widest mb-2 text-white">Architectural Chiaroscuro</h3>
+                            <p class="font-sans text-xs text-et-concrete leading-relaxed font-light">
                                 Light is a physical sculpting tool. We balance harsh, directional sunlight with cavernous shadow to carve out monumental volumes.
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Ethical Foundations</span>
                     <span>Zero Ornamentation</span>
@@ -425,36 +474,36 @@
             <section class="slide-page bg-et-paper text-et-ink">
                 <div class="chapter-badge">03</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 03 // Spatial Math</span>
                     <span>48-Field Universal Grid</span>
                     <span>Plate 05 / 16</span>
                 </header>
 
                 <div class="grid grid-cols-12 gap-16 z-10 my-auto items-center">
-                    <div class="col-span-5 space-y-6">
+                    <div class="col-span-5 space-y-5">
                         <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Grid Mechanics</span>
-                        <h2 class="font-sans font-black text-5xl uppercase tracking-tighter">6 × 8 Field Coordinate System.</h2>
-                        <p class="font-sans text-base text-neutral-700 leading-relaxed font-light">
+                        <h2 class="font-sans font-black text-4xl uppercase tracking-tighter">6 × 8 Field Coordinate System.</h2>
+                        <p class="font-sans text-sm text-neutral-700 leading-relaxed font-light">
                             Every medium—from business cards to architectural site hoardings—is mapped onto an immutable 48-field matrix (6 columns × 8 rows).
                         </p>
-                        <div class="font-mono text-xs space-y-3 bg-white p-6 border border-et-concrete/30">
+                        <div class="font-mono text-xs space-y-2 bg-white p-5 border border-et-concrete/30">
                             <p class="text-et-crimson font-bold">• 6 Vertical Spatial Modules</p>
                             <p class="text-et-ink">• 8 Horizontal Structural Baselines</p>
                             <p class="text-et-concrete">• Minimum 25% Contiguous Negative Void</p>
                         </div>
                     </div>
 
-                    <div class="col-span-7 bg-white p-8 border border-et-concrete/30 shadow-lg">
+                    <div class="col-span-7 bg-white p-6 border border-et-concrete/30 shadow-md">
                         <div class="aspect-[16/9] w-full bg-et-paper relative border border-et-concrete/20 overflow-hidden flex items-center justify-center">
                             <div class="absolute inset-0 grid-48-field opacity-80"></div>
                             
-                            <div class="w-3/4 h-3/5 border-2 border-et-ink bg-white/95 p-6 flex flex-col justify-between relative z-10 shadow-md">
+                            <div class="w-3/4 h-3/5 border-2 border-et-ink bg-white/95 p-5 flex flex-col justify-between relative z-10 shadow-sm">
                                 <div class="flex justify-between font-mono text-[9px] text-et-concrete">
                                     <span>COORD: [X1:Y1]</span>
                                     <span>VOID MARGIN: 2-FIELD (16.6%)</span>
                                 </div>
-                                <div class="text-center font-mono text-sm uppercase font-bold tracking-widest text-et-ink">
+                                <div class="text-center font-mono text-xs uppercase font-bold tracking-widest text-et-ink">
                                     Content Module Snapped to Coordinates
                                 </div>
                                 <div class="flex justify-between font-mono text-[9px] text-et-crimson">
@@ -463,11 +512,11 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="font-mono text-xs uppercase tracking-widest text-et-concrete text-center mt-4">Fig 5.1 — 48-Field Structural Coordinate Schematic</p>
+                        <p class="font-mono text-[10px] uppercase tracking-widest text-et-concrete text-center mt-3">Fig 5.1 — 48-Field Structural Coordinate Schematic</p>
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Universal Grid Standard</span>
                     <span>16:9 Architecture Baseline</span>
                     <span>Strict Calibration</span>
@@ -480,18 +529,18 @@
             <section class="slide-page bg-white text-et-ink">
                 <div class="chapter-badge">04</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 04 // Identity Construction</span>
                     <span>Logo & Monogram Blueprint</span>
                     <span>Plate 06 / 16</span>
                 </header>
 
                 <div class="grid grid-cols-12 gap-16 z-10 my-auto items-center">
-                    <div class="col-span-6 bg-et-paper border border-et-concrete/30 p-16 flex flex-col items-center justify-center relative shadow-inner">
+                    <div class="col-span-6 bg-et-paper border border-et-concrete/30 p-14 flex flex-col items-center justify-center relative shadow-inner">
                         <div class="absolute inset-0 grid-48-field opacity-20 pointer-events-none"></div>
                         <span class="absolute top-4 left-4 font-mono text-[9px] uppercase tracking-widest text-et-concrete">Primary Construction</span>
                         
-                        <div class="w-28 h-28 mb-8 text-et-ink relative z-10">
+                        <div class="w-24 h-24 mb-6 text-et-ink relative z-10">
                             <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-currentColor stroke-[2]">
                                 <rect x="10" y="10" width="80" height="80" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.35"/>
                                 <path d="M30,30 L30,70 L60,70" />
@@ -507,10 +556,10 @@
                         </div>
                     </div>
 
-                    <div class="col-span-6 space-y-6">
+                    <div class="col-span-6 space-y-5">
                         <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Geometric Anatomy</span>
                         <h2 class="font-sans font-black text-4xl uppercase tracking-tighter">Drafted Precision.</h2>
-                        <p class="font-sans text-base text-neutral-700 leading-relaxed font-light">
+                        <p class="font-sans text-sm text-neutral-700 leading-relaxed font-light">
                             The brandmark unites an architectural drafting monogram ("ET") with custom ultra-tracked grotesk typography. Line weights strictly maintain a 2pt stroke ratio.
                         </p>
 
@@ -527,7 +576,7 @@
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Geometric Vector Standards</span>
                     <span>Scale Locked</span>
@@ -540,7 +589,7 @@
             <section class="slide-page bg-et-paper text-et-ink">
                 <div class="chapter-badge">05</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 05 // Logo Integrity</span>
                     <span>Clearspace & Prohibitions</span>
                     <span>Plate 07 / 16</span>
@@ -548,46 +597,46 @@
 
                 <div class="grid grid-cols-12 gap-12 z-10 my-auto items-center">
                     <!-- Clearspace demo -->
-                    <div class="col-span-5 bg-white border border-et-concrete/30 p-12 flex flex-col items-center justify-center relative shadow-sm">
+                    <div class="col-span-5 bg-white border border-et-concrete/30 p-10 flex flex-col items-center justify-center relative shadow-sm">
                         <span class="absolute top-3 left-4 font-mono text-[9px] uppercase text-et-concrete">Clearspace Formula</span>
                         
-                        <div class="relative p-10 border-2 border-dashed border-et-crimson bg-et-crimson/5 flex flex-col items-center">
+                        <div class="relative p-8 border-2 border-dashed border-et-crimson bg-et-crimson/5 flex flex-col items-center">
                             <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-et-crimson font-mono font-bold text-xs">1X [E]</div>
                             <div class="absolute top-1/2 -left-8 -translate-y-1/2 text-et-crimson font-mono font-bold text-xs">1X [E]</div>
                             <div class="absolute top-1/2 -right-8 -translate-y-1/2 text-et-crimson font-mono font-bold text-xs">1X [E]</div>
                             <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-et-crimson font-mono font-bold text-xs">1X [E]</div>
                             
-                            <div class="w-12 h-12 mb-3 text-et-ink">
+                            <div class="w-10 h-10 mb-2 text-et-ink">
                                 <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-currentColor stroke-[2]"><path d="M30,30 L30,70 L60,70" /><path d="M30,50 L50,50" /><path d="M30,30 L60,30" /><path d="M70,30 L70,70" /><path d="M55,30 L85,30" /></svg>
                             </div>
-                            <div class="logo-stack text-lg font-sans font-extralight text-et-ink m-0">
+                            <div class="logo-stack text-base font-sans font-extralight text-et-ink m-0">
                                 <span class="mb-1">E L I F</span><span>T A R M A N</span>
                             </div>
                         </div>
-                        <p class="font-mono text-[10px] text-et-concrete uppercase mt-6">Safety Margin = Full Cap Height of 'E'</p>
+                        <p class="font-mono text-[9px] text-et-concrete uppercase mt-4">Safety Margin = Full Cap Height of 'E'</p>
                     </div>
 
                     <!-- Violations Grid -->
                     <div class="col-span-7 grid grid-cols-2 gap-4">
-                        <div class="bg-white border border-neutral-300 p-6 flex flex-col items-center justify-center relative h-40 shadow-sm">
+                        <div class="bg-white border border-neutral-300 p-5 flex flex-col items-center justify-center relative h-36 shadow-sm">
                             <span class="absolute top-2 left-2 text-et-crimson font-mono text-[10px] font-bold">✕ 01</span>
                             <div class="logo-stack text-xs font-black text-et-ink"><span class="mb-1">E L I F</span><span>T A R M A N</span></div>
                             <p class="absolute bottom-2 text-center font-mono text-[8px] text-et-concrete uppercase">Do not alter font weight</p>
                         </div>
 
-                        <div class="bg-white border border-neutral-300 p-6 flex flex-col items-center justify-center relative h-40 shadow-sm">
+                        <div class="bg-white border border-neutral-300 p-5 flex flex-col items-center justify-center relative h-36 shadow-sm">
                             <span class="absolute top-2 left-2 text-et-crimson font-mono text-[10px] font-bold">✕ 02</span>
                             <div class="logo-stack text-xs font-extralight text-blue-600"><span class="mb-1">E L I F</span><span>T A R M A N</span></div>
                             <p class="absolute bottom-2 text-center font-mono text-[8px] text-et-concrete uppercase">No unauthorized hues</p>
                         </div>
 
-                        <div class="bg-white border border-neutral-300 p-6 flex flex-col items-center justify-center relative h-40 shadow-sm">
+                        <div class="bg-white border border-neutral-300 p-5 flex flex-col items-center justify-center relative h-36 shadow-sm">
                             <span class="absolute top-2 left-2 text-et-crimson font-mono text-[10px] font-bold">✕ 03</span>
                             <div class="flex flex-col items-center font-extralight text-et-ink text-xs"><span class="">ELIF</span><span>TARMAN</span></div>
                             <p class="absolute bottom-2 text-center font-mono text-[8px] text-et-concrete uppercase">Do not reduce tracking</p>
                         </div>
 
-                        <div class="bg-white border border-neutral-300 p-6 flex flex-col items-center justify-center relative h-40 shadow-sm">
+                        <div class="bg-white border border-neutral-300 p-5 flex flex-col items-center justify-center relative h-36 shadow-sm">
                             <span class="absolute top-2 left-2 text-et-crimson font-mono text-[10px] font-bold">✕ 04</span>
                             <div class="logo-stack text-xs font-extralight text-et-ink transform -rotate-12"><span class="mb-1">E L I F</span><span>T A R M A N</span></div>
                             <p class="absolute bottom-2 text-center font-mono text-[8px] text-et-concrete uppercase">Do not rotate or skew</p>
@@ -595,7 +644,7 @@
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Zero Tolerance Guidelines</span>
                     <span>Preservation Rule</span>
@@ -608,7 +657,7 @@
             <section class="slide-page bg-[#111] text-white">
                 <div class="chapter-badge">06</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-3">
                     <span>Section 06 // Color Specifications</span>
                     <span>Chromatic Swatches</span>
                     <span>Plate 08 / 16</span>
@@ -616,87 +665,87 @@
 
                 <div class="z-10 my-auto">
                     <p class="font-mono text-xs tracking-superwide text-et-crimson uppercase mb-2">Tonal Matrix</p>
-                    <h2 class="font-sans font-black text-5xl uppercase tracking-tighter mb-8">Architectural Spectrum.</h2>
+                    <h2 class="font-sans font-black text-4xl uppercase tracking-tighter mb-6">Architectural Spectrum.</h2>
 
-                    <div class="grid grid-cols-5 gap-6">
+                    <div class="grid grid-cols-5 gap-5">
                         <!-- Crimson -->
-                        <div class="bg-et-ink border border-[#333] p-5 flex flex-col justify-between h-96">
-                            <div class="w-full h-36 bg-[#FF0A0A] border-b-2 border-white/20"></div>
+                        <div class="bg-et-ink border border-[#333] p-4 flex flex-col justify-between h-80">
+                            <div class="w-full h-28 bg-[#FF0A0A] border-b-2 border-white/20"></div>
                             <div>
-                                <p class="font-sans font-bold text-base text-et-crimson uppercase">ET Crimson</p>
-                                <p class="font-mono text-[10px] text-et-concrete mt-2 leading-relaxed">
+                                <p class="font-sans font-bold text-sm text-et-crimson uppercase">ET Crimson</p>
+                                <p class="font-mono text-[9px] text-et-concrete mt-1.5 leading-relaxed">
                                     HEX: #FF0A0A<br>
                                     RGB: 255 / 10 / 10<br>
                                     CMYK: 0 / 96 / 96 / 0<br>
                                     PANTONE: Warm Red C
                                 </p>
                             </div>
-                            <span class="font-mono text-[8px] text-white/50 uppercase">Primary Interactive CTA</span>
+                            <span class="font-mono text-[7px] text-white/50 uppercase">Primary Interactive CTA</span>
                         </div>
 
                         <!-- Ink -->
-                        <div class="bg-et-ink border border-[#333] p-5 flex flex-col justify-between h-96">
-                            <div class="w-full h-36 bg-[#0A0A0A] border border-[#333]"></div>
+                        <div class="bg-et-ink border border-[#333] p-4 flex flex-col justify-between h-80">
+                            <div class="w-full h-28 bg-[#0A0A0A] border border-[#333]"></div>
                             <div>
-                                <p class="font-sans font-bold text-base text-white uppercase">ET Ink</p>
-                                <p class="font-mono text-[10px] text-et-concrete mt-2 leading-relaxed">
+                                <p class="font-sans font-bold text-sm text-white uppercase">ET Ink</p>
+                                <p class="font-mono text-[9px] text-et-concrete mt-1.5 leading-relaxed">
                                     HEX: #0A0A0A<br>
                                     RGB: 10 / 10 / 10<br>
                                     CMYK: 75 / 68 / 67 / 90<br>
                                     PANTONE: Black 6 C
                                 </p>
                             </div>
-                            <span class="font-mono text-[8px] text-white/50 uppercase">Monolithic Dark Field</span>
+                            <span class="font-mono text-[7px] text-white/50 uppercase">Monolithic Dark Field</span>
                         </div>
 
                         <!-- Paper -->
-                        <div class="bg-et-ink border border-[#333] p-5 flex flex-col justify-between h-96">
-                            <div class="w-full h-36 bg-[#F7F6F2]"></div>
+                        <div class="bg-et-ink border border-[#333] p-4 flex flex-col justify-between h-80">
+                            <div class="w-full h-28 bg-[#F7F6F2]"></div>
                             <div>
-                                <p class="font-sans font-bold text-base text-white uppercase">ET Paper</p>
-                                <p class="font-mono text-[10px] text-et-concrete mt-2 leading-relaxed">
+                                <p class="font-sans font-bold text-sm text-white uppercase">ET Paper</p>
+                                <p class="font-mono text-[9px] text-et-concrete mt-1.5 leading-relaxed">
                                     HEX: #F7F6F2<br>
                                     RGB: 247 / 246 / 242<br>
                                     CMYK: 2 / 2 / 4 / 0<br>
                                     STOCK: Raw Cotton Paper
                                 </p>
                             </div>
-                            <span class="font-mono text-[8px] text-white/50 uppercase">Tactile Void Ground</span>
+                            <span class="font-mono text-[7px] text-white/50 uppercase">Tactile Void Ground</span>
                         </div>
 
                         <!-- Concrete -->
-                        <div class="bg-et-ink border border-[#333] p-5 flex flex-col justify-between h-96">
-                            <div class="w-full h-36 bg-[#737373]"></div>
+                        <div class="bg-et-ink border border-[#333] p-4 flex flex-col justify-between h-80">
+                            <div class="w-full h-28 bg-[#737373]"></div>
                             <div>
-                                <p class="font-sans font-bold text-base text-white uppercase">ET Concrete</p>
-                                <p class="font-mono text-[10px] text-et-concrete mt-2 leading-relaxed">
+                                <p class="font-sans font-bold text-sm text-white uppercase">ET Concrete</p>
+                                <p class="font-mono text-[9px] text-et-concrete mt-1.5 leading-relaxed">
                                     HEX: #737373<br>
                                     RGB: 115 / 115 / 115<br>
                                     CMYK: 0 / 0 / 0 / 55<br>
                                     PANTONE: Cool Gray 8 C
                                 </p>
                             </div>
-                            <span class="font-mono text-[8px] text-white/50 uppercase">Structural Mid-Tone</span>
+                            <span class="font-mono text-[7px] text-white/50 uppercase">Structural Mid-Tone</span>
                         </div>
 
                         <!-- Stone -->
-                        <div class="bg-et-ink border border-[#333] p-5 flex flex-col justify-between h-96">
-                            <div class="w-full h-36 bg-[#D9D9D9]"></div>
+                        <div class="bg-et-ink border border-[#333] p-4 flex flex-col justify-between h-80">
+                            <div class="w-full h-28 bg-[#D9D9D9]"></div>
                             <div>
-                                <p class="font-sans font-bold text-base text-white uppercase">ET Stone</p>
-                                <p class="font-mono text-[10px] text-et-concrete mt-2 leading-relaxed">
+                                <p class="font-sans font-bold text-sm text-white uppercase">ET Stone</p>
+                                <p class="font-mono text-[9px] text-et-concrete mt-1.5 leading-relaxed">
                                     HEX: #D9D9D9<br>
                                     RGB: 217 / 217 / 217<br>
                                     CMYK: 0 / 0 / 0 / 15<br>
                                     PANTONE: Cool Gray 2 C
                                 </p>
                             </div>
-                            <span class="font-mono text-[8px] text-white/50 uppercase">Travertine Accent</span>
+                            <span class="font-mono text-[7px] text-white/50 uppercase">Travertine Accent</span>
                         </div>
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-3">
                     <span>Color Standards</span>
                     <span>100% Calibrated ISO 12647</span>
                     <span>Five Swatches</span>
@@ -709,14 +758,14 @@
             <section class="slide-page bg-et-paper text-et-ink">
                 <div class="chapter-badge">07</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 07 // Typographic Engine</span>
                     <span>Hierarchy & Scale Ratios</span>
                     <span>Plate 09 / 16</span>
                 </header>
 
                 <div class="grid grid-cols-12 gap-12 z-10 my-auto items-center">
-                    <div class="col-span-4 space-y-6">
+                    <div class="col-span-4 space-y-5">
                         <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Type Pairings</span>
                         <h2 class="font-sans font-black text-4xl uppercase tracking-tighter">Inter & Space Mono.</h2>
                         <p class="font-sans text-sm text-neutral-700 leading-relaxed font-light">
@@ -726,23 +775,23 @@
 
                     <div class="col-span-8 bg-white border border-et-concrete/30 shadow-md">
                         <div class="divide-y divide-neutral-200 font-mono text-xs">
-                            <div class="p-5 flex items-center justify-between">
+                            <div class="p-4 flex items-center justify-between">
                                 <div>
                                     <p class="font-bold text-et-crimson uppercase">H1 Monument</p>
                                     <p class="text-et-concrete text-[10px]">Inter Black / 64–120pt / Tight Tracking</p>
                                 </div>
-                                <h3 class="font-sans font-black text-3xl uppercase tracking-tighter">ARCHITECTURAL VOID</h3>
+                                <h3 class="font-sans font-black text-2xl uppercase tracking-tighter">ARCHITECTURAL VOID</h3>
                             </div>
 
-                            <div class="p-5 flex items-center justify-between">
+                            <div class="p-4 flex items-center justify-between">
                                 <div>
                                     <p class="font-bold text-et-ink uppercase">H2 Section</p>
                                     <p class="text-et-concrete text-[10px]">Inter ExtraLight / 32–48pt / Wide Tracking</p>
                                 </div>
-                                <h4 class="font-sans font-extralight text-xl uppercase tracking-superwide">MASTERY OF MASS</h4>
+                                <h4 class="font-sans font-extralight text-lg uppercase tracking-superwide">MASTERY OF MASS</h4>
                             </div>
 
-                            <div class="p-5 flex items-center justify-between">
+                            <div class="p-4 flex items-center justify-between">
                                 <div>
                                     <p class="font-bold text-et-ink uppercase">Body Text</p>
                                     <p class="text-et-concrete text-[10px]">Inter Regular / 12–16pt / Leading 1.6</p>
@@ -752,7 +801,7 @@
                                 </p>
                             </div>
 
-                            <div class="p-5 flex items-center justify-between bg-et-ink text-white">
+                            <div class="p-4 flex items-center justify-between bg-et-ink text-white">
                                 <div>
                                     <p class="font-bold text-et-crimson uppercase">Metadata / Mono</p>
                                     <p class="text-et-concrete text-[10px]">Space Mono Bold / 9–11pt / Widest</p>
@@ -763,7 +812,7 @@
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Typographic Scale Ratio</span>
                     <span>Inter + Space Mono</span>
@@ -776,14 +825,14 @@
             <section class="slide-page bg-white text-et-ink">
                 <div class="chapter-badge">08</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 08 // Visual Imagery</span>
                     <span>Art Direction & Chiaroscuro</span>
                     <span>Plate 10 / 16</span>
                 </header>
 
                 <div class="grid grid-cols-12 gap-12 z-10 my-auto items-center">
-                    <div class="col-span-4 space-y-6">
+                    <div class="col-span-4 space-y-5">
                         <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Shadow Architecture</span>
                         <h2 class="font-sans font-black text-4xl uppercase tracking-tighter">Chiaroscuro Imagery.</h2>
                         <p class="font-sans text-sm text-neutral-700 leading-relaxed font-light">
@@ -810,7 +859,7 @@
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Tonal Chiaroscuro System</span>
                     <span>Monochrome Only</span>
@@ -823,7 +872,7 @@
             <section class="slide-page bg-et-paper text-et-ink">
                 <div class="chapter-badge">09</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 09 // Corporate Collateral</span>
                     <span>Stationery Architecture</span>
                     <span>Plate 11 / 16</span>
@@ -832,16 +881,16 @@
                 <div class="grid grid-cols-12 gap-12 z-10 my-auto items-center">
                     <!-- Letterhead -->
                     <div class="col-span-5 flex flex-col items-center">
-                        <div class="w-72 aspect-[1/1.414] bg-white shadow-xl border border-et-concrete/30 p-6 flex flex-col justify-between relative">
+                        <div class="w-64 aspect-[1/1.414] bg-white shadow-xl border border-et-concrete/30 p-5 flex flex-col justify-between relative">
                             <div>
-                                <div class="flex justify-between items-start mb-6 pb-2 border-b border-et-ink">
-                                    <div class="w-6 h-6 text-et-ink">
+                                <div class="flex justify-between items-start mb-4 pb-2 border-b border-et-ink">
+                                    <div class="w-5 h-5 text-et-ink">
                                         <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-currentColor stroke-[2]"><rect x="10" y="10" width="80" height="80" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.3"/><path d="M30,30 L30,70 L60,70" /><path d="M30,50 L50,50" /><path d="M30,30 L60,30" /><path d="M70,30 L70,70" /><path d="M55,30 L85,30" /></svg>
                                     </div>
-                                    <div class="logo-stack text-[6px] font-sans font-extralight text-et-ink"><span class="mb-0.5">E L I F</span><span>T A R M A N</span></div>
+                                    <div class="logo-stack text-[5px] font-sans font-extralight text-et-ink"><span class="mb-0.5">E L I F</span><span>T A R M A N</span></div>
                                 </div>
-                                <div class="font-mono text-[6px] text-et-concrete mb-4">TO: PRIVATE CLIENT // PROJECT: TRAVERTINE SANCTUARY</div>
-                                <div class="space-y-1.5 opacity-25">
+                                <div class="font-mono text-[5px] text-et-concrete mb-3">TO: PRIVATE CLIENT // PROJECT: TRAVERTINE SANCTUARY</div>
+                                <div class="space-y-1 opacity-25">
                                     <div class="w-full h-[1px] bg-et-ink"></div>
                                     <div class="w-full h-[1px] bg-et-ink"></div>
                                     <div class="w-4/5 h-[1px] bg-et-ink"></div>
@@ -851,11 +900,11 @@
                                 <span>Elif Tarman Studio</span><span>contact@eliftarman.com</span>
                             </div>
                         </div>
-                        <p class="font-mono text-xs uppercase tracking-widest text-et-concrete mt-4">A4 Letterhead (300gsm Cotton)</p>
+                        <p class="font-mono text-[10px] uppercase tracking-widest text-et-concrete mt-3">A4 Letterhead (300gsm Cotton)</p>
                     </div>
 
                     <!-- Duplexed Business Card -->
-                    <div class="col-span-7 space-y-6">
+                    <div class="col-span-7 space-y-5">
                         <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Tactile Specification</span>
                         <h2 class="font-sans font-black text-3xl uppercase tracking-tighter">600gsm Duplexed Cards.</h2>
                         <p class="font-sans text-sm text-neutral-700 leading-relaxed font-light">
@@ -864,15 +913,15 @@
 
                         <div class="flex gap-6 items-center">
                             <!-- Card Front -->
-                            <div class="w-64 aspect-[1.75/1] bg-white border border-neutral-300 p-6 flex flex-col justify-center items-center relative shadow-lg">
-                                <div class="w-10 h-10 text-et-ink mb-2">
+                            <div class="w-60 aspect-[1.75/1] bg-white border border-neutral-300 p-5 flex flex-col justify-center items-center relative shadow-lg">
+                                <div class="w-8 h-8 text-et-ink mb-2">
                                     <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-currentColor stroke-[2]"><rect x="10" y="10" width="80" height="80" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.3"/><path d="M30,30 L30,70 L60,70" /><path d="M30,50 L50,50" /><path d="M30,30 L60,30" /><path d="M70,30 L70,70" /><path d="M55,30 L85,30" /></svg>
                                 </div>
                                 <div class="absolute bottom-0 left-0 w-full h-1 bg-et-crimson"></div>
                             </div>
 
                             <!-- Card Back -->
-                            <div class="w-64 aspect-[1.75/1] bg-et-ink text-white p-5 flex flex-col justify-between relative shadow-xl border-l-4 border-et-crimson">
+                            <div class="w-60 aspect-[1.75/1] bg-et-ink text-white p-4 flex flex-col justify-between relative shadow-xl border-l-4 border-et-crimson">
                                 <div>
                                     <p class="font-sans font-bold text-xs tracking-widest uppercase">Elif Tarman</p>
                                     <p class="font-mono text-[7px] text-et-concrete uppercase">Principal Architect</p>
@@ -887,7 +936,7 @@
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Corporate Print Standards</span>
                     <span>Duplex Lamination</span>
@@ -900,14 +949,14 @@
             <section class="slide-page bg-et-ink text-white">
                 <div class="chapter-badge">10</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-3">
                     <span>Section 10 // Social Channels</span>
                     <span>48-Field Post Discipline</span>
                     <span>Plate 12 / 16</span>
                 </header>
 
                 <div class="grid grid-cols-12 gap-12 z-10 my-auto items-center">
-                    <div class="col-span-5 space-y-6">
+                    <div class="col-span-5 space-y-5">
                         <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">1:1 Content Square</span>
                         <h2 class="font-sans font-black text-4xl uppercase tracking-tighter">Social Framework.</h2>
                         <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
@@ -927,14 +976,14 @@
                     </div>
 
                     <div class="col-span-7 bg-white p-6 border border-neutral-800 shadow-2xl flex justify-center">
-                        <div class="w-96 aspect-square relative overflow-hidden bg-et-paper flex border border-et-concrete/20">
+                        <div class="w-80 aspect-square relative overflow-hidden bg-et-paper flex border border-et-concrete/20">
                             <div class="absolute inset-y-0 right-0 w-4/5 et-photo-effect">
                                 <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=800&q=80" alt="Brutalist Interior" class="w-full h-full object-cover">
                             </div>
                             <div class="absolute inset-0 grid-48-field opacity-70 pointer-events-none z-20"></div>
                             
                             <div class="absolute top-[12.5%] left-[16.66%] z-30">
-                                <h4 class="font-sans font-black text-3xl text-white uppercase mix-blend-difference leading-none">
+                                <h4 class="font-sans font-black text-2xl text-white uppercase mix-blend-difference leading-none">
                                     Monolithic<br>Travertine<br>Void
                                 </h4>
                             </div>
@@ -946,7 +995,7 @@
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Social Media Systems</span>
                     <span>1:1 Widescreen Alignment</span>
@@ -959,16 +1008,16 @@
             <section class="slide-page bg-et-paper text-et-ink">
                 <div class="chapter-badge">11</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 11 // Digital UI</span>
                     <span>Website & Screen Architecture</span>
                     <span>Plate 13 / 16</span>
                 </header>
 
-                <div class="w-full max-w-4xl mx-auto my-auto">
+                <div class="w-full max-w-3xl mx-auto my-auto">
                     <div class="aspect-video bg-white border-[10px] border-et-ink rounded-t-xl relative overflow-hidden shadow-2xl flex flex-col">
                         <!-- Nav -->
-                        <div class="flex justify-between items-center border-b border-et-concrete/20 px-6 py-3 bg-white relative z-20">
+                        <div class="flex justify-between items-center border-b border-et-concrete/20 px-6 py-2.5 bg-white relative z-20">
                             <div class="logo-stack text-xs font-sans font-extralight text-et-ink flex-row gap-2">
                                 <span>ELIF</span><span>TARMAN</span>
                             </div>
@@ -976,22 +1025,22 @@
                         </div>
                         
                         <!-- Hero Web UI -->
-                        <div class="flex-1 relative bg-et-paper flex flex-col justify-center px-12 z-10">
+                        <div class="flex-1 relative bg-et-paper flex flex-col justify-center px-10 z-10">
                             <div class="absolute right-0 top-0 bottom-0 w-3/5 et-photo-effect">
                                 <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=800&q=80" alt="Web UI Hero" class="w-full h-full object-cover">
                             </div>
-                            <h2 class="font-sans font-black text-4xl relative z-20 text-white mix-blend-difference uppercase leading-none">
+                            <h2 class="font-sans font-black text-3xl relative z-20 text-white mix-blend-difference uppercase leading-none">
                                 Sanctuary<br>In Concrete<br>No. 08
                             </h2>
-                            <span class="font-mono text-[9px] text-et-ink uppercase mt-6 relative z-20 font-bold bg-white self-start px-3 py-1 border border-et-ink">Explore Project &rarr;</span>
+                            <span class="font-mono text-[8px] text-et-ink uppercase mt-5 relative z-20 font-bold bg-white self-start px-2.5 py-1 border border-et-ink">Explore Project &rarr;</span>
                         </div>
                     </div>
                     <div class="h-3 bg-[#D9D9D9] w-full rounded-b-lg border-b-2 border-neutral-400 flex justify-center">
-                        <div class="w-24 h-1.5 bg-[#bbb] rounded-b-md"></div>
+                        <div class="w-20 h-1 bg-[#bbb] rounded-b-md"></div>
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Digital Interface Architecture</span>
                     <span>12-Column Grid</span>
@@ -1004,43 +1053,43 @@
             <section class="slide-page bg-[#111] text-white">
                 <div class="chapter-badge">12</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/30 pb-3">
                     <span>Section 12 // Environmental Identity</span>
                     <span>Signage & Architectural Facades</span>
                     <span>Plate 14 / 16</span>
                 </header>
 
-                <div class="grid grid-cols-2 gap-12 z-10 my-auto">
+                <div class="grid grid-cols-2 gap-10 z-10 my-auto">
                     <!-- 3D Steel Facade -->
-                    <div class="bg-et-ink border border-[#333] p-8 flex flex-col justify-between shadow-2xl relative">
+                    <div class="bg-et-ink border border-[#333] p-6 flex flex-col justify-between shadow-2xl relative">
                         <span class="font-mono text-[9px] uppercase tracking-widest text-et-concrete">3D Brushed Steel Facade Lettering</span>
                         
-                        <div class="w-full aspect-[2/1] bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center p-8 my-6 relative overflow-hidden">
+                        <div class="w-full aspect-[2/1] bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center p-6 my-4 relative overflow-hidden">
                             <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 20px 20px;"></div>
-                            <div class="logo-stack text-2xl font-sans font-extralight text-neutral-200 tracking-ultra relative z-10 drop-shadow-[0_10px_10px_rgba(0,0,0,0.9)]">
-                                <span class="mb-2">E L I F</span>
+                            <div class="logo-stack text-xl font-sans font-extralight text-neutral-200 tracking-ultra relative z-10 drop-shadow-[0_10px_10px_rgba(0,0,0,0.9)]">
+                                <span class="mb-1">E L I F</span>
                                 <span>T A R M A N</span>
                             </div>
                         </div>
-                        <p class="font-mono text-[9px] uppercase text-et-concrete">Mounting: 25mm Standoffs on Raw Board-Formed Concrete</p>
+                        <p class="font-mono text-[8px] uppercase text-et-concrete">Mounting: 25mm Standoffs on Raw Board-Formed Concrete</p>
                     </div>
 
                     <!-- Monolithic Totem -->
-                    <div class="bg-et-ink border border-[#333] p-8 flex flex-col justify-between shadow-2xl relative">
+                    <div class="bg-et-ink border border-[#333] p-6 flex flex-col justify-between shadow-2xl relative">
                         <span class="font-mono text-[9px] uppercase tracking-widest text-et-concrete">Monolithic Entrance Totem</span>
                         
-                        <div class="w-full aspect-[2/1] bg-[#1e1e1e] border-t-2 border-et-crimson flex flex-col justify-between p-6 my-6 shadow-inner">
+                        <div class="w-full aspect-[2/1] bg-[#1e1e1e] border-t-2 border-et-crimson flex flex-col justify-between p-5 my-4 shadow-inner">
                             <div class="font-mono text-[7px] text-et-concrete uppercase tracking-widest">STUDIO ENTRANCE // SANCTUARY 01</div>
-                            <div class="logo-stack text-lg font-sans font-extralight text-white">
+                            <div class="logo-stack text-base font-sans font-extralight text-white">
                                 <span class="mb-1">E L I F</span><span>T A R M A N</span>
                             </div>
                             <div class="font-mono text-[7px] text-et-crimson uppercase">ARCHITECTURAL HEADQUARTERS</div>
                         </div>
-                        <p class="font-mono text-[9px] uppercase text-et-concrete">Material: Solid Travertine Block with Laser Engraving</p>
+                        <p class="font-mono text-[8px] uppercase text-et-concrete">Material: Solid Travertine Block with Laser Engraving</p>
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/30 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Environmental Signage</span>
                     <span>Three-Dimensional Standards</span>
@@ -1053,55 +1102,55 @@
             <section class="slide-page bg-et-paper text-et-ink">
                 <div class="chapter-badge">13</div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-et-concrete/20 pb-3">
                     <span>Section 13 // Object Collateral</span>
                     <span>Artifacts & Identification</span>
                     <span>Plate 15 / 16</span>
                 </header>
 
-                <div class="grid grid-cols-3 gap-12 z-10 my-auto items-center">
+                <div class="grid grid-cols-3 gap-10 z-10 my-auto items-center">
                     <!-- Canvas Tote -->
                     <div class="flex flex-col items-center">
-                        <div class="w-48 h-60 bg-[#E8E6DF] border border-neutral-300 rounded-b-xl relative flex flex-col items-center justify-center shadow-lg">
-                            <div class="absolute -top-8 w-20 h-20 border-4 border-[#D9D6CE] rounded-full"></div>
-                            <div class="w-10 h-10 text-et-ink mb-3">
+                        <div class="w-44 h-56 bg-[#E8E6DF] border border-neutral-300 rounded-b-xl relative flex flex-col items-center justify-center shadow-lg">
+                            <div class="absolute -top-7 w-16 h-16 border-4 border-[#D9D6CE] rounded-full"></div>
+                            <div class="w-8 h-8 text-et-ink mb-2">
                                 <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-currentColor stroke-[3]"><path d="M30,30 L30,70 L60,70" /><path d="M30,50 L50,50" /><path d="M30,30 L60,30" /><path d="M70,30 L70,70" /><path d="M55,30 L85,30" /></svg>
                             </div>
-                            <div class="logo-stack text-xs font-sans font-extralight text-et-ink"><span class="mb-0.5">E L I F</span><span>T A R M A N</span></div>
+                            <div class="logo-stack text-[10px] font-sans font-extralight text-et-ink"><span class="mb-0.5">E L I F</span><span>T A R M A N</span></div>
                         </div>
-                        <p class="font-mono text-[10px] uppercase tracking-widest text-et-concrete mt-4">800gsm Raw Cotton Tote</p>
+                        <p class="font-mono text-[9px] uppercase tracking-widest text-et-concrete mt-3">800gsm Raw Cotton Tote</p>
                     </div>
 
                     <!-- Staff Security ID Badge -->
                     <div class="flex flex-col items-center">
-                        <div class="w-44 h-72 bg-white border border-neutral-300 shadow-xl p-4 flex flex-col justify-between items-center relative">
-                            <div class="w-8 h-1 bg-neutral-300 rounded-full"></div>
+                        <div class="w-40 h-64 bg-white border border-neutral-300 shadow-xl p-4 flex flex-col justify-between items-center relative">
+                            <div class="w-6 h-1 bg-neutral-300 rounded-full"></div>
                             <div class="w-full aspect-square bg-neutral-100 overflow-hidden et-photo-effect border border-neutral-200">
                                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" alt="Staff portrait" class="w-full h-full object-cover">
                             </div>
                             <div class="w-full text-left">
                                 <p class="font-sans font-black text-xs uppercase">E. Tarman</p>
-                                <p class="font-mono text-[7px] text-et-concrete uppercase">Principal Architect</p>
+                                <p class="font-mono text-[6px] text-et-concrete uppercase">Principal Architect</p>
                             </div>
-                            <div class="w-full h-6 bg-et-ink flex items-center justify-center text-white font-mono text-[6px] uppercase tracking-widest">
+                            <div class="w-full h-5 bg-et-ink flex items-center justify-center text-white font-mono text-[6px] uppercase tracking-widest">
                                 Studio Pass A-01
                             </div>
                         </div>
-                        <p class="font-mono text-[10px] uppercase tracking-widest text-et-concrete mt-4">Acrylic Security ID Badge</p>
+                        <p class="font-mono text-[9px] uppercase tracking-widest text-et-concrete mt-3">Acrylic Security ID Badge</p>
                     </div>
 
                     <!-- Ceramic Tumbler -->
                     <div class="flex flex-col items-center">
-                        <div class="w-32 h-52 bg-[#181818] rounded-b-3xl rounded-t-sm shadow-xl flex flex-col items-center justify-center relative border-t-4 border-[#333]">
-                            <div class="w-full h-14 bg-[#F7F6F2] flex items-center justify-center border-y border-neutral-300">
-                                <div class="logo-stack text-[8px] font-sans font-extralight text-et-ink m-0"><span class="mb-0.5">E L I F</span><span>T A R M A N</span></div>
+                        <div class="w-28 h-48 bg-[#181818] rounded-b-3xl rounded-t-sm shadow-xl flex flex-col items-center justify-center relative border-t-4 border-[#333]">
+                            <div class="w-full h-12 bg-[#F7F6F2] flex items-center justify-center border-y border-neutral-300">
+                                <div class="logo-stack text-[7px] font-sans font-extralight text-et-ink m-0"><span class="mb-0.5">E L I F</span><span>T A R M A N</span></div>
                             </div>
                         </div>
-                        <p class="font-mono text-[10px] uppercase tracking-widest text-et-concrete mt-4">Matte Ceramic Tumbler</p>
+                        <p class="font-mono text-[9px] uppercase tracking-widest text-et-concrete mt-3">Matte Ceramic Tumbler</p>
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-et-concrete/20 pt-3">
                     <span>Elif Tarman Studio</span>
                     <span>Material Artifacts</span>
                     <span>Tactile Verification</span>
@@ -1115,28 +1164,28 @@
                 <div class="absolute top-12 left-16 crosshair text-[#333]"></div>
                 <div class="absolute bottom-12 right-16 crosshair text-[#333]"></div>
 
-                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-[#222] pb-4">
+                <header class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-b border-[#222] pb-3">
                     <span>End of Document</span>
                     <span>Volume 03.0 Conclusion</span>
                     <span>Plate 16 / 16</span>
                 </header>
 
                 <div class="z-10 flex flex-col items-center text-center my-auto">
-                    <div class="w-20 h-20 mb-8 text-white/30">
+                    <div class="w-16 h-16 mb-6 text-white/30">
                         <svg viewBox="0 0 100 100" class="w-full h-full fill-none stroke-currentColor stroke-[2]"><rect x="10" y="10" width="80" height="80" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.3"/><path d="M30,30 L30,70 L60,70" /><path d="M30,50 L50,50" /><path d="M30,30 L60,30" /><path d="M70,30 L70,70" /><path d="M55,30 L85,30" /></svg>
                     </div>
 
-                    <h2 class="font-sans font-black text-6xl uppercase tracking-tighter mb-8 leading-none max-w-4xl">
+                    <h2 class="font-sans font-black text-5xl uppercase tracking-tighter mb-6 leading-none max-w-3xl">
                         Forming the spaces<br>that form you.
                     </h2>
 
-                    <div class="logo-stack text-2xl font-sans font-extralight text-white/40 mb-8">
-                        <span class="mb-2">E L I F</span>
+                    <div class="logo-stack text-xl font-sans font-extralight text-white/40 mb-6">
+                        <span class="mb-1">E L I F</span>
                         <span>T A R M A N</span>
                     </div>
                 </div>
 
-                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-[#222] pt-4">
+                <footer class="w-full flex justify-between items-center z-10 font-mono text-xs uppercase tracking-widest text-et-concrete border-t border-[#222] pt-3">
                     <span>Elif Tarman Interior Architecture Studio © 2026</span>
                     <span>All Rights Reserved</span>
                     <span>Master Edition Completed</span>
@@ -1148,12 +1197,12 @@
 
     <!-- TOAST NOTIFICATION -->
     <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black font-mono text-xs uppercase tracking-widest px-6 py-3 border-2 border-et-crimson shadow-2xl z-50 transition-all duration-300 opacity-0 pointer-events-none">
-        Notification
+        Bildirim
     </div>
 
     <!-- SCRIPT ENGINE -->
     <script>
-        // Automatic Scale-to-Fit Engine
+        // Responsive Fit Scaler for on-screen viewing
         function autoScaleDeck() {
             const frames = document.querySelectorAll('.slide-frame');
             const targetWidth = 1920;
@@ -1183,10 +1232,10 @@
             const gridDot = document.getElementById('grid-dot');
             pages.forEach(p => p.classList.toggle('grid-48-field'));
             gridDot.classList.toggle('bg-et-crimson');
-            showToast('48-Field Grid Matrix Toggled');
+            showToast('48-Field Grid Kılavuzu Açıldı / Kapatıldı');
         }
 
-        // Keyboard Navigation (Arrow Keys & 'G')
+        // Keyboard Shortcut 'G'
         document.addEventListener('keydown', (e) => {
             if (e.key === 'g' || e.key === 'G') {
                 toggleGridOverlay();
@@ -1205,48 +1254,82 @@
             }, 2200);
         }
 
-        // PDF Export Engine (16:9 Landscape A3 Master Output)
-        function exportDeckPDF() {
+        // Zero-Shift Direct Multi-Page PDF Export
+        async function exportDeckPDF() {
             const btn = document.getElementById('pdf-btn');
             const btnText = document.getElementById('pdf-btn-text');
             const originalText = btnText.innerText;
             
-            btnText.innerText = 'Rendering...';
-            btn.classList.add('opacity-50', 'cursor-wait');
+            btnText.innerText = 'Sayfalar İşleniyor...';
+            btn.disabled = true;
 
-            // Reset scaling during capture
+            // Hide HUD and overlays
+            document.getElementById('hud-controls').style.display = 'none';
+            const toasts = document.querySelectorAll('#toast, .noise-overlay');
+            toasts.forEach(el => el.style.display = 'none');
+
+            // Temporarily reset scaling for 1:1 pixel rendering
             const frames = document.querySelectorAll('.slide-frame');
-            frames.forEach(f => {
+            const originalTransforms = [];
+            const originalMargins = [];
+            frames.forEach((f, i) => {
+                originalTransforms[i] = f.style.transform;
+                originalMargins[i] = f.style.marginBottom;
                 f.style.transform = 'none';
                 f.style.marginBottom = '0px';
+                f.style.boxShadow = 'none';
             });
 
-            const element = document.getElementById('deck-viewport');
-            const opt = {
-                margin: 0,
-                filename: 'Elif_Tarman_Master_Brand_Bible_1920x1080.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { 
-                    scale: 1.5, 
-                    useCORS: true, 
-                    scrollY: 0,
-                    windowWidth: 1920
-                },
-                jsPDF: { unit: 'px', format: [1920, 1080], orientation: 'landscape' }
-            };
+            try {
+                const slides = document.querySelectorAll('.slide-page');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'px',
+                    format: [1920, 1080],
+                    compress: true
+                });
 
-            html2pdf().set(opt).from(element).save().then(() => {
-                autoScaleDeck();
-                btnText.innerText = 'Exported ✓';
-                btn.classList.remove('opacity-50', 'cursor-wait');
+                for (let i = 0; i < slides.length; i++) {
+                    btnText.innerText = `Sayfa ${i + 1} / ${slides.length}...`;
+                    const slide = slides[i];
+                    
+                    const canvas = await html2canvas(slide, {
+                        scale: 1.5,
+                        width: 1920,
+                        height: 1080,
+                        windowWidth: 1920,
+                        windowHeight: 1080,
+                        useCORS: true,
+                        logging: false,
+                        backgroundColor: null
+                    });
+
+                    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                    if (i > 0) {
+                        pdf.addPage([1920, 1080], 'landscape');
+                    }
+                    pdf.addImage(imgData, 'JPEG', 0, 0, 1920, 1080, undefined, 'FAST');
+                }
+
+                pdf.save('Elif_Tarman_Studio_Master_Brand_Guidelines_1920x1080.pdf');
+                btnText.innerText = 'PDF Hazır ✓';
+            } catch (err) {
+                console.error('PDF Export Error:', err);
+                alert('PDF oluşturulurken bir hata meydana geldi: ' + err.message);
+                btnText.innerText = 'Hata';
+            } finally {
+                // Restore controls and scaling
+                document.getElementById('hud-controls').style.display = '';
+                toasts.forEach(el => el.style.display = '');
+                frames.forEach((f, i) => {
+                    f.style.transform = originalTransforms[i];
+                    f.style.marginBottom = originalMargins[i];
+                    f.style.boxShadow = '';
+                });
+                btn.disabled = false;
                 setTimeout(() => { btnText.innerText = originalText; }, 3000);
-            }).catch(err => {
-                console.error(err);
-                autoScaleDeck();
-                btnText.innerText = 'Error';
-                btn.classList.remove('opacity-50', 'cursor-wait');
-                setTimeout(() => { btnText.innerText = originalText; }, 3000);
-            });
+            }
         }
     </script>
 </body>
